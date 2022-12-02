@@ -198,7 +198,7 @@ namespace LDBot
             ADBHelper.Delay(ms);
         }
 
-        protected List<string> getInstalledPackages()
+        protected List<string> getInstalledPackages(bool isShowDebug = false)
         {
             if (!isRunning)
                 return null;
@@ -208,6 +208,8 @@ namespace LDBot
             foreach (string rs in results)
             {
                 installedPackage.Add(rs.Replace("package:", "").Trim());
+                if (isShowDebug)
+                    writeLog(rs.Replace("package:", "").Trim());
             }
             return installedPackage;
         }
@@ -236,15 +238,6 @@ namespace LDBot
 
         protected void changeProxy(string proxyConfig = "")
         {
-            if (proxyConfig.Length > 0)
-            {
-                _ld.isUseProxy = true;
-            }
-            else
-            {
-                _ld.isUseProxy = false;
-            }
-            _ld.Proxy = proxyConfig;
             LDManager.changeProxy(_ld, proxyConfig);
         }
 
@@ -252,21 +245,29 @@ namespace LDBot
         {
             using (var request = new HttpRequest())
             {
-                request.UserAgent = Http.ChromeUserAgent();
-                if (_ld.isUseProxy)
-                    request.Proxy = HttpProxyClient.Parse(_ld.Proxy);
-                string content = request.Get("http://ip-api.com/json").ToString();
-                var jsonStruct = new
+                try
                 {
-                    status = "",
-                    country = "",
-                    query = ""
-                };
-                var data = JsonConvert.DeserializeAnonymousType(content, jsonStruct);
-                if (data.status == "success")
-                    return data.query;
-                return "";
-
+                    request.UserAgent = Http.ChromeUserAgent();
+                    if (_ld.isUseProxy)
+                        request.Proxy = HttpProxyClient.Parse(_ld.Proxy);
+                    string content = request.Get("https://ip4.seeip.org").ToString();
+                    /*var jsonStruct = new
+                    {
+                        ip = "",
+                        country = "",
+                        cc = ""
+                    };
+                    var data = JsonConvert.DeserializeAnonymousType(content, jsonStruct);
+                    if (data.ip != "")
+                        return data.ip;
+                    return "";*/
+                    return content;
+                }
+                catch(Exception e)
+                {
+                    writeLog(e.Message);
+                    return "";
+                }
             }
         }
 

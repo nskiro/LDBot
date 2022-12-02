@@ -64,7 +64,6 @@ namespace LDBot
 						string adbDeviceInfo = adbDevices.FirstOrDefault(str => str.Contains((ld.Index * 2 + 5554).ToString()) || str.Contains((ld.Index * 2 + 5555).ToString()));
 						if (adbDeviceInfo != null)
 						{
-
 							adbDeviceInfo = adbDeviceInfo.Replace("device", "").Trim();
 							Helper.raiseOnUpdateLDStatus(ld.Index, "Connecting to " + adbDeviceInfo);
 							Helper.runCMD(adb, "connect " + adbDeviceInfo);
@@ -354,13 +353,16 @@ namespace LDBot
 				if (proxyConfig.Length > 0)
 				{
 					Helper.runCMD(adb, string.Format("-s {0} shell settings put global http_proxy {1}", ld.DeviceID, proxyConfig));
+					ld.isUseProxy = true;
 					Helper.raiseOnUpdateLDStatus(ld.Index, "Use HTTP proxy " + proxyConfig);
 				}
 				else
 				{
 					Helper.runCMD(adb, string.Format("-s {0} shell settings put global http_proxy :0", ld.DeviceID));
+					ld.isUseProxy = false;
 					Helper.raiseOnUpdateLDStatus(ld.Index, "Remove HTTP proxy");
 				}
+				ld.Proxy = proxyConfig;
 			}
 			catch(Exception e)
             {
@@ -388,7 +390,50 @@ namespace LDBot
 				Helper.raiseOnErrorMessage(e);
 			}			
 		}
-		
+
+		public static string executeLdConsoleForResult(string cmdCommand, int timeout = 10000, int retry = 2)
+		{
+			string result;
+			try
+			{
+				var process = new Process();
+				process.StartInfo = new ProcessStartInfo
+				{
+					FileName = ldConsole,
+					Arguments = cmdCommand,
+					CreateNoWindow = true,
+					UseShellExecute = false,
+					WindowStyle = ProcessWindowStyle.Hidden,
+					RedirectStandardInput = true,
+					RedirectStandardOutput = true
+				};
+				// process.WaitForExit();
+
+				while (retry >= 0)
+				{
+					retry--;
+					process.Start();
+					if (!process.WaitForExit(timeout))
+					{
+						process.Kill();
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				var text = process.StandardOutput.ReadToEnd();
+				result = text;
+			}
+			catch
+			{
+				result = null;
+			}
+
+			return result;
+		}
+
 		public static void scheduleScript(LDEmulator ld, DateTime runTime)
         {
 			try

@@ -153,6 +153,16 @@ namespace LDBot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_powershell_a_task_based_command_line_shell_and_scripting_language_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-powershell-a-task-based-command-line-shell-and-scripting-language-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap import {
             get {
                 object obj = ResourceManager.GetObject("import", resourceCulture);

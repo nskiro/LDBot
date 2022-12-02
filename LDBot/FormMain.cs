@@ -121,19 +121,13 @@ namespace LDBot
                     {
                         if (!this.list_Emulator.Items.ContainsKey(ld.Index.ToString()))
                         {
-                            ListViewItem listViewItem = new ListViewItem(ld.Index.ToString())
-                            {
-                                Name = ld.Index.ToString(),
-                                SubItems = {
-                                ld.Name,
-                                ld.isRunning ? "Running" : "Stop"
-                            },
-                                UseItemStyleForSubItems = false
-                            };
-                            listViewItem.Tag = ld;
-                            this.list_Emulator.Items.Add(listViewItem);
                             JToken configFileContent = JToken.Parse(File.ReadAllText(string.Format("{0}\\vms\\config\\leidian{1}.config", ConfigurationManager.AppSettings["LDPath"], ld.Index)));
                             bool isNeedEdit = false;
+                            string isRooted = "";
+                            if (configFileContent["basicSettings.rootMode"] != null && bool.Parse(configFileContent["basicSettings.rootMode"].ToString()) == true)
+                            {
+                                isRooted = " (R)";
+                            }
                             if (configFileContent["basicSettings.adbDebug"] == null || configFileContent["basicSettings.adbDebug"].ToString() == "0")
                             {
                                 configFileContent["basicSettings.adbDebug"] = 1;
@@ -159,6 +153,17 @@ namespace LDBot
                                 string rs = configFileContent.ToString();
                                 File.WriteAllText(string.Format("{0}\\vms\\config\\leidian{1}.config", ConfigurationManager.AppSettings["LDPath"], ld.Index), rs);
                             }
+                            ListViewItem listViewItem = new ListViewItem(ld.Index.ToString())
+                            {
+                                Name = ld.Index.ToString(),
+                                SubItems = {
+                                ld.Name + isRooted,
+                                ld.isRunning ? "Running" : "Stop"
+                            },
+                                UseItemStyleForSubItems = false
+                            };
+                            listViewItem.Tag = ld;
+                            this.list_Emulator.Items.Add(listViewItem);
                         }
                     }
                 }
@@ -617,7 +622,7 @@ namespace LDBot
 
         private void changeLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string changeLog = string.Format("1.1.3:\n- (New) Schedule a timer to run the script.\n- (Fixed) Remove sort emulator when start/reboot LD.\n- (Fixed) \"Stop script\" works more stable.\n\n1.1.2:\n- (New) Copy/Paste script from LD to other LD.\n\n1.1.1:\n- (Fixed) List view bug when create/clone/delete LD.\n- (Fixed) Delete script directory when LD deleted.\n\n1.1:\n- (New) Capture guide.");
+            string changeLog = string.Format("1.1.4::\n-(New) Root/Unroot emulators with one click.\n-(Update) getInstalledPackages(bool isShowDebug = false)\n-(Update) getCurrentIP()\n-(Update) Emulator list shows root/unroot. Emulator name suffix by (R) means Rooted.\n-(Fixed) Bug changeProxy() in script.\n\n1.1.3:\n- (New) Schedule a timer to run the script.\n- (Fixed) Remove sort emulator when start/reboot LD.\n- (Fixed) \"Stop script\" works more stable.\n\n1.1.2:\n- (New) Copy/Paste script from LD to other LD.\n\n1.1.1:\n- (Fixed) List view bug when create/clone/delete LD.\n- (Fixed) Delete script directory when LD deleted.\n\n1.1:\n- (New) Capture guide.");
             MessageBox.Show(changeLog,"Change Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -706,6 +711,53 @@ namespace LDBot
                             LDManager.scheduleScript(ld, DateTime.Parse(prompt.Result));
                         }
                     }
+                }
+            }
+        }
+
+        private void toggleRoot(LDEmulator ld)
+        {
+            if (ld.isRunning)
+            {
+                LDManager.quitLD(ld.Index);
+            }
+            JToken configFileContent = JToken.Parse(File.ReadAllText(string.Format("{0}\\vms\\config\\leidian{1}.config", ConfigurationManager.AppSettings["LDPath"], ld.Index)));
+            configFileContent["basicSettings.rootMode"] = (configFileContent["basicSettings.rootMode"] == null) ? true : !bool.Parse(configFileContent["basicSettings.rootMode"].ToString());
+            string rs = configFileContent.ToString();
+            File.WriteAllText(string.Format("{0}\\vms\\config\\leidian{1}.config", ConfigurationManager.AppSettings["LDPath"], ld.Index), rs);
+            ListViewItem[] listViewItemArray = this.list_Emulator.Items.Find(ld.Index.ToString(), false);
+            if (listViewItemArray.Length != 0)
+            {
+                listViewItemArray[0].SubItems[1].Text = bool.Parse(configFileContent["basicSettings.rootMode"].ToString()) ? ld.Name + " (R)" : ld.Name;
+                if(listViewItemArray[0].SubItems[1].Text.Contains("(R)"))
+                {
+                    Helper.raiseOnUpdateLDStatus(ld.Index, "Root OK");
+                }
+                else
+                {
+                    Helper.raiseOnUpdateLDStatus(ld.Index, "Unroot OK");
+                }    
+            }
+            
+        }
+
+        private void enableRootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (list_Emulator.SelectedItems.Count > 0)
+            {
+                LDEmulator ld = list_Emulator.SelectedItems[0].Tag as LDEmulator;
+                toggleRoot(ld);
+            }
+        }
+
+        private void rootUnrootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (list_Emulator.SelectedItems.Count > 0)
+            {
+                foreach (object selectedLD in list_Emulator.SelectedItems)
+                {
+                    LDEmulator ld = ((ListViewItem)selectedLD).Tag as LDEmulator;
+                    toggleRoot(ld);
                 }
             }
         }

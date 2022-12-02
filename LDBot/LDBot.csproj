@@ -119,7 +119,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BotAction.cs" />
+    <Compile Include="C:\Users\Minh Tam\Documents\BotAction.cs">
+      <Link>BotAction.cs</Link>
+    </Compile>
     <Compile Include="DelegateEntity.cs" />
     <Compile Include="FormError.cs">
       <SubType>Form</SubType>
@@ -191,6 +193,7 @@
   <ItemGroup>
     <Content Include="LDBot_Icon.ico" />
     <Content Include="ldplayer220-220.ico" />
+    <None Include="Resources\icons8-powershell-a-task-based-command-line-shell-and-scripting-language-32.png" />
     <None Include="Resources\icons8-clock-64 %281%29.png" />
     <None Include="Resources\icons8-clock-64.png" />
     <None Include="Resources\icons8-paste-30.png" />
