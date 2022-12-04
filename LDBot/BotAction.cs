@@ -136,6 +136,26 @@ namespace LDBot
             }
         }
 
+        protected bool checkStringInImage(string findStr, int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
+        {
+            try
+            {
+                Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                bool check = false;
+                bool flag = startCropX != 0 || startCropY != 0 || right != 0 || bottom != 0;
+                if (flag)
+                {
+                    screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, (right - startCropX), (bottom - startCropY)));
+                }
+                check = Helper.RemoveSign4VietnameseString(Helper.getTextFromImage(screen)).Contains(Helper.RemoveSign4VietnameseString(findStr));
+                return check;
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                return false;
+            }
+        }
         protected void click(int x, int y, int count = 1)
         {
             if (!isRunning)
@@ -143,7 +163,6 @@ namespace LDBot
             ADBHelper.Tap(_ld.DeviceID, x, y, count);
             setStatus(string.Format("Click at {0}:{1}", x, y));
         }
-
         protected void clickP(double x, double y, int count = 1)
         {
             if (!isRunning)
@@ -151,7 +170,6 @@ namespace LDBot
             ADBHelper.TapByPercent(_ld.DeviceID, x, y, count);
             setStatus(string.Format("Click at {0:0.00}%:{1:0.00}%", x, y));
         }
-
         protected void swipe(int startX, int startY, int stopX, int stopY, int swipeTime = 300)
         {
             if (!isRunning)
@@ -159,7 +177,6 @@ namespace LDBot
             ADBHelper.Swipe(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
             setStatus(string.Format("Swipe from {0}:{1} to {2}:{3}", startX, startY, stopX, stopY));
         }
-
         protected void swipeP(double startX, double startY, double stopX, double stopY, int swipeTime = 300)
         {
             if (!isRunning)
@@ -167,7 +184,6 @@ namespace LDBot
             ADBHelper.SwipeByPercent(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
             setStatus(string.Format("Swipe from {0:0.00}%:{1:0.00}% to {2:0.00}%:{3:0.00}%", startX, startY, stopX, stopY));
         }
-
         protected void inputKey(ADBKeyEvent key)
         {
             if (!isRunning)
@@ -175,7 +191,13 @@ namespace LDBot
             ADBHelper.Key(_ld.DeviceID, key);
             setStatus("Press key " + key.ToString());
         }
-
+        protected void inputKey(VKeys key)
+        {
+            if (!isRunning)
+                return;
+            AutoControl.SendKeyBoardPress(_ld.BindHandle, key);
+            setStatus("Press key " + key.ToString());
+        }
         protected void inputText(string txt)
         {
             if (!isRunning)
@@ -183,21 +205,18 @@ namespace LDBot
             ADBHelper.InputText(_ld.DeviceID, txt);
             setStatus("Input: " + txt);
         }
-
         protected void clickAndHold(int x, int y, int duration = 500)
         {
             if (!isRunning)
                 return;
             ADBHelper.LongPress(_ld.DeviceID, x, y, duration);
         }
-
         protected void delay(double ms)
         {
             if (!isRunning)
                 return;
             ADBHelper.Delay(ms);
         }
-
         protected List<string> getInstalledPackages(bool isShowDebug = false)
         {
             if (!isRunning)
@@ -213,13 +232,11 @@ namespace LDBot
             }
             return installedPackage;
         }
-
         protected void writeLog(string log)
         {
             if (log.Length > 0)
                 Helper.raiseOnWriteLog(log);
         }
-
         protected void runApp(string packageName)
         {
             if (!isRunning)
@@ -227,7 +244,6 @@ namespace LDBot
             setStatus("Run " + packageName);
             LDManager.executeLdConsole(string.Format("runapp --index {0} --packagename {1}", _ld.Index, packageName));
         }
-
         protected void killApp(string packageName)
         {
             if (!isRunning)
@@ -235,12 +251,10 @@ namespace LDBot
             setStatus("Kill " + packageName);
             LDManager.executeLdConsole(string.Format("killapp --index {0} --packagename {1}", _ld.Index, packageName));
         }
-
         protected void changeProxy(string proxyConfig = "")
         {
             LDManager.changeProxy(_ld, proxyConfig);
         }
-
         protected string getCurrentIP()
         {
             using (var request = new HttpRequest())
@@ -250,7 +264,7 @@ namespace LDBot
                     request.UserAgent = Http.ChromeUserAgent();
                     if (_ld.isUseProxy)
                         request.Proxy = HttpProxyClient.Parse(_ld.Proxy);
-                    string content = request.Get("https://ip4.seeip.org").ToString();
+                    string content = request.Get("https://api.ipify.org").ToString();
                     /*var jsonStruct = new
                     {
                         ip = "",
@@ -270,7 +284,6 @@ namespace LDBot
                 }
             }
         }
-
         protected List<MimeMessage> getAllMails(string mailServer, int port, string mail, string password)
         {
             try
@@ -285,7 +298,6 @@ namespace LDBot
                 return null;
             }
         } 
-        
         protected void clearAppData(string packageName)
         {
             if (!isRunning)
@@ -293,16 +305,44 @@ namespace LDBot
             setStatus("Clear " + packageName);
             Helper.runCMD(LDManager.adb, string.Format("-s {0} shell pm clear {1}", _ld.DeviceID, packageName));
         }
-
         protected void restartLD()
         {
             if(_ld.isRunning)
                 LDManager.restartLD(_ld);
         }
-
         protected double getScreenScaling()
         {
             return Helper.GetScreenScalingFactor();
+        }
+        protected void deleteGoogleAccount(string email)
+        {
+            if (isRunning)
+            {
+                string subQuery = string.Format("\"DELETE FROM accounts WHERE name = '{0}'\"", email);
+                string query = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_de/0/accounts_de.db \"{1}\"\"", _ld.Index, subQuery);
+                string query2 = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_ce/0/accounts_ce.db \"{1}\"\"", _ld.Index, subQuery);
+                LDManager.executeLdConsole(query);
+                LDManager.executeLdConsole(query2);
+                restartLD();
+            }
+        }
+        protected bool checkView(string viewCheck)
+        {
+            return getView().Contains(viewCheck);
+        }
+        protected string getView()
+        {
+            return LDManager.executeLdConsoleForResult(string.Format("adb --index {0} --command \"shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'\"", _ld.Index));
+        }
+        protected void openIntent(string intentName)
+        {
+            LDManager.executeLdConsole(string.Format("adb --index {0} --command \"shell am start -a {1}\"", _ld.Index, intentName));
+            delay(2000);
+        }
+        protected void openUrl(string url)
+        {
+            LDManager.executeLdConsole(string.Format("adb --index {0} --command \"shell am start -a android.intent.action.VIEW -d {1}\"", _ld.Index, url));
+            delay(2000);
         }
         #endregion
     }

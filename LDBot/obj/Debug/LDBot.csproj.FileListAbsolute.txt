@@ -38,3 +38,9 @@ D:\Projects\LDBot\LDBot\obj\Debug\LDBot.csproj.CoreCompileInputs.cache
 D:\Projects\LDBot\LDBot\obj\Debug\LDBot.csproj.CopyComplete
 D:\Projects\LDBot\LDBot\obj\Debug\LDBot.exe
 D:\Projects\LDBot\LDBot\obj\Debug\LDBot.pdb
+D:\Projects\LDBot\LDBot\bin\Debug\x86\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Debug\x86\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Debug\x64\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Debug\x64\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Debug\tessdata\vie.traineddata
+D:\Projects\LDBot\LDBot\bin\Debug\Tesseract.dll

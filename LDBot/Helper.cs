@@ -16,6 +16,7 @@ using System.IO;
 using MailKit.Net.Proxy;
 using System.Threading;
 using System.Runtime.InteropServices;
+using Tesseract;
 
 namespace LDBot
 {
@@ -38,6 +39,40 @@ namespace LDBot
 
             // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
         }
+        private static readonly string[] VietnameseSigns = new string[]
+        {
+
+            "aAeEoOuUiIdDyY",
+
+            "áàạảãâấầậẩẫăắằặẳẵ",
+
+            "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+            "éèẹẻẽêếềệểễ",
+
+            "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+            "óòọỏõôốồộổỗơớờợởỡ",
+
+            "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+            "úùụủũưứừựửữ",
+
+            "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+            "íìịỉĩ",
+
+            "ÍÌỊỈĨ",
+
+            "đ",
+
+            "Đ",
+
+            "ýỳỵỷỹ",
+
+            "ÝỲỴỶỸ"
+
+        };
         public static void AddOrUpdateAppSettings(string key, string value)
         {
             try
@@ -246,6 +281,63 @@ namespace LDBot
             var screenScalingFactor = (double)physicalScreenHeight / Screen.PrimaryScreen.Bounds.Height;//SystemParameters.PrimaryScreenHeight;
 
             return screenScalingFactor;
+        }
+
+        public static string getTextFromImage(string imgPath)
+        {
+            Bitmap img = (Bitmap)Image.FromFile(imgPath);
+            return getTextFromImage(img);
+        }
+        public static string getTextFromImage(Bitmap img)
+        {
+            string res = "";
+            using (var engine = new TesseractEngine(@"tessdata", "vie", EngineMode.Default))
+            {
+                using (var page = engine.Process(img, PageSegMode.AutoOnly))
+                    res = page.GetText();
+            }
+            return res;
+        }
+
+        public static bool searchTextFromImgAndClick(string imgPath, string textToFind)
+        {
+            Bitmap img = (Bitmap)Image.FromFile(imgPath);
+            return searchTextFromImgAndClick(img, textToFind);
+        }
+
+        public static bool searchTextFromImgAndClick(Bitmap img, string textToFind)
+        {
+            Tesseract.PageIteratorLevel myLevel = PageIteratorLevel.TextLine;
+            using(var engine = new TesseractEngine(@"tessdata", "vie", EngineMode.Default))
+            using (var page = engine.Process(img, PageSegMode.AutoOnly))
+            using (var iter = page.GetIterator())
+            {
+                iter.Begin();
+                do
+                {
+                    if (iter.TryGetBoundingBox(myLevel, out var rect))
+                    {
+                        var curText = iter.GetText(myLevel);
+                        if (RemoveSign4VietnameseString(curText) == RemoveSign4VietnameseString(textToFind))
+                        {
+                            raiseOnWriteLog(rect.X1.ToString() + ", " + rect.Y1.ToString());
+                            return true;
+                        }
+                    }
+                } while (iter.Next(myLevel));
+                return false;
+            }
+        }
+
+        public static string RemoveSign4VietnameseString(string str)
+        {
+            //Tiến hành thay thế , lọc bỏ dấu cho chuỗi
+            for (int i = 1; i < VietnameseSigns.Length; i++)
+            {
+                for (int j = 0; j < VietnameseSigns[i].Length; j++)
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+            }
+            return str;
         }
     }
 
