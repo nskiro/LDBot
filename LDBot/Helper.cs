@@ -299,13 +299,13 @@ namespace LDBot
             return res;
         }
 
-        public static bool searchTextFromImgAndClick(string imgPath, string textToFind)
+        public static Point? searchTextFromImgAndClick(string imgPath, string textToFind, bool isDebug = false)
         {
             Bitmap img = (Bitmap)Image.FromFile(imgPath);
-            return searchTextFromImgAndClick(img, textToFind);
+            return searchTextFromImgAndClick(img, textToFind, isDebug);
         }
 
-        public static bool searchTextFromImgAndClick(Bitmap img, string textToFind)
+        public static Point? searchTextFromImgAndClick(Bitmap img, string textToFind, bool isDebug = false)
         {
             Tesseract.PageIteratorLevel myLevel = PageIteratorLevel.TextLine;
             using(var engine = new TesseractEngine(@"tessdata", "vie", EngineMode.Default))
@@ -318,14 +318,17 @@ namespace LDBot
                     if (iter.TryGetBoundingBox(myLevel, out var rect))
                     {
                         var curText = iter.GetText(myLevel);
-                        if (RemoveSign4VietnameseString(curText) == RemoveSign4VietnameseString(textToFind))
+                        if (isDebug)
+                            raiseOnWriteLog(RemoveSign4VietnameseString(curText).Trim());
+                        if (RemoveSign4VietnameseString(curText).Trim() == RemoveSign4VietnameseString(textToFind).Trim())
                         {
-                            raiseOnWriteLog(rect.X1.ToString() + ", " + rect.Y1.ToString());
-                            return true;
+                            Point point = new Point(rect.X1 + (rect.X2 - rect.X1) / 2, rect.Y1 + (rect.Y2 - rect.Y1) / 2);
+                            raiseOnWriteLog(point.X.ToString() + ", " + point.Y.ToString());
+                            return point;
                         }
                     }
                 } while (iter.Next(myLevel));
-                return false;
+                return null;
             }
         }
 

@@ -6,6 +6,8 @@ using System.Drawing;
 using xNet;
 using MimeKit;
 using System.Threading.Tasks;
+using Emgu.CV;
+using Emgu.CV.Structure;
 
 namespace LDBot
 {
@@ -343,6 +345,26 @@ namespace LDBot
         {
             LDManager.executeLdConsole(string.Format("adb --index {0} --command \"shell am start -a android.intent.action.VIEW -d {1}\"", _ld.Index, url));
             delay(2000);
+        }
+
+        protected void searchImgAndClick(string findText, string imgPath = "", bool isDebug = false, int clickCount = 1)
+        {
+            Point? coords;
+            if (imgPath != "")
+                coords = Helper.searchTextFromImgAndClick(imgPath, findText, isDebug);
+            else
+            {
+                Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                coords = Helper.searchTextFromImgAndClick(screen, findText, isDebug);
+            }    
+            if(coords != null)
+            {
+                ADBHelper.Tap(_ld.DeviceID, coords.Value.X, coords.Value.Y, clickCount);
+            }
+            else
+            {
+                writeLog(_ld.Name + ": " + findText + " not found");
+            }    
         }
         #endregion
     }
