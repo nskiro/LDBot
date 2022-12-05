@@ -32,3 +32,9 @@ D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.CopyComplete
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.exe
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.pdb
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.AssemblyReference.cache
+D:\Projects\LDBot\LDBot\bin\Release\x86\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Release\x86\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Release\x64\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Release\x64\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Release\tessdata\vie.traineddata
+D:\Projects\LDBot\LDBot\bin\Release\Tesseract.dll
