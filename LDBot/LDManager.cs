@@ -70,6 +70,7 @@ namespace LDBot
 							Thread.Sleep(1000);
 							Helper.raiseOnUpdateLDStatus(ld.Index, "Adb connected");
 							ld.DeviceID = adbDeviceInfo;
+							ld.isRunning = true;
 							isADBConnected = true;
 						}
 						else
@@ -240,9 +241,9 @@ namespace LDBot
 					{
 						Helper.raiseOnUpdateLDStatus(ld.Index, "Rebooting...");
 						LDManager.executeLdConsole("reboot --index " + ld.Index);
+						ld.isRunning = false;
 						Thread.Sleep(3000);
 						getLDInfo(ld);
-						//LDManager.executeLdConsole("sortWnd");
 					}
 					else
 						Helper.raiseOnUpdateLDStatus(ld.Index, "LD has not started");
@@ -278,6 +279,11 @@ namespace LDBot
 			}
 		}
 
+		public static bool idLdRunning(int index)
+        {
+			string rs = executeLdConsoleForResult($"isrunning --index {index}").Trim();
+			return rs == "running";
+		}
 		public static void loadScript(LDEmulator ld)
 		{
 			if (ld != null)

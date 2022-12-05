@@ -155,6 +155,7 @@
     <Compile Include="LDManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptException.cs" />
     <Compile Include="ScriptFileNameEntity.cs" />
     <EmbeddedResource Include="FormError.resx">
       <DependentUpon>FormError.cs</DependentUpon>

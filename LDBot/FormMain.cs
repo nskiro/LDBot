@@ -28,6 +28,7 @@ namespace LDBot
             Helper.onUpdateLDStatus += ((ldIndex, stt) => updateLDStatus(ldIndex, stt));
             Helper.onWriteLog += ((log) => writeLog(log));
             Helper.onLoadListLD += (() => loadEmulatorListView());
+            Helper.onGetLDStatus += ((index) => getLDStatus(index));
         }
 
         private void loadConfig()
@@ -77,6 +78,23 @@ namespace LDBot
                     listViewItemArray[0].SubItems[2].Text = status;
                 }    
             }    
+        }
+
+        private string getLDStatus(int ldIndex)
+        {
+            if (this.InvokeRequired)
+            {
+                return (string)this.Invoke(new MethodInvoker(() => getLDStatus(ldIndex)));
+            }
+            else
+            {
+                ListViewItem[] listViewItemArray = this.list_Emulator.Items.Find(ldIndex.ToString(), false);
+                if (listViewItemArray.Length != 0)
+                {
+                    return listViewItemArray[0].SubItems[2].Text.Trim();
+                }
+                return "";
+            }
         }
 
         private void writeLog(string log)
@@ -388,6 +406,7 @@ namespace LDBot
             if (list_Emulator.SelectedItems.Count > 0)
             {
                 LDEmulator ld = list_Emulator.SelectedItems[0].Tag as LDEmulator;
+                ld.botAction.isRunning = true;
                 LDManager.startScript(ld);
             }
             else

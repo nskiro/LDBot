@@ -15,7 +15,7 @@ namespace LDBot
     public class BotAction
     {
         protected LDEmulator _ld;
-        protected bool isRunning;
+        public bool isRunning;
         private Random rd;
         public BotAction(LDEmulator ld)
         {
@@ -57,62 +57,72 @@ namespace LDBot
                 Helper.raiseOnUpdateLDStatus(_ld.Index, stt);
         }
 
-        protected bool findAndClick(string imgPath, double similarPercent = 0.9, bool isClickUntilDisApp = false, int xPlus = 0, int yPlus = 0, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
+        protected bool findAndClick(string imgPath, int timeOut = 7, double similarPercent = 0.9, bool isClickUntilDisApp = false, int xPlus = 0, int yPlus = 0, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
         {
             if (!isRunning)
                 return false;
             Bitmap img = (Bitmap)Image.FromFile(imgPath);
-            click_image:
-            Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
-            bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
-            if (flag)
+            Bitmap screen = null;
+            bool result = false;
+            while (timeOut > 0)
             {
-                screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
-            }
-            Point? point = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent);
-            bool flag2 = point != null;
-            bool result;
-            if (flag2)
-            {
-                setStatus(string.Format("{0} found-click", Helper.getFileNameByPath(imgPath)));
-                int Xmore = rd.Next(3);
-                int Ymore = rd.Next(3);
-                //AutoControl.SendClickOnPosition(_ld.TopHandle, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY, EMouseKey.LEFT, 1);
-                ADBHelper.Tap(_ld.DeviceID, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY);
-                if (isClickUntilDisApp)
+                click_image:
+                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
+                if (flag)
                 {
-                    delay(1000);
-                    goto click_image;
+                    screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
                 }
-                    
-                result = true;
-            }  
-            else
-            {
+                Point? point = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent);
+                bool flag2 = point != null;
+                if (flag2)
+                {
+                    setStatus(string.Format("{0} found-click", Helper.getFileNameByPath(imgPath)));
+                    int Xmore = rd.Next(3);
+                    int Ymore = rd.Next(3);
+                    //AutoControl.SendClickOnPosition(_ld.TopHandle, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY, EMouseKey.LEFT, 1);
+                    ADBHelper.Tap(_ld.DeviceID, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY);
+                    if (isClickUntilDisApp)
+                    {
+                        delay(1000);
+                        goto click_image;
+                    }
+                    result = true;
+                    break;
+                }
                 setStatus(string.Format("{0} not found", Helper.getFileNameByPath(imgPath)));
-                result = false;
+                timeOut--;
+                delay(200);
             }
             screen.Dispose();
             img.Dispose();
             return result;
         }
 
-        protected bool findImage(string imgPath, double similarPercent = 0.9, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
+        protected bool findImage(string imgPath, int timeOut = 7, double similarPercent = 0.9, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
         {
             if (!isRunning)
                 return false;
             Bitmap img = (Bitmap)Image.FromFile(imgPath);
-            Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
-            bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
-            if (flag)
+            Bitmap screen = null;
+            bool result = false;
+            while (timeOut > 0)
             {
-                screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
+                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
+                if (flag)
+                {
+                    screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
+                }
+                result = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent) != null;
+                if (result)
+                {
+                    setStatus(string.Format("{0} found", Helper.getFileNameByPath(imgPath)));
+                    break;
+                }
+                timeOut--;
+                delay(200);
             }
-            bool result = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent) != null;
-            if (result)
-                setStatus(string.Format("{0} found", Helper.getFileNameByPath(imgPath)));
-            else
-                setStatus(string.Format("{0} not found", Helper.getFileNameByPath(imgPath)));
             screen.Dispose();
             img.Dispose();
             return result;
@@ -239,12 +249,15 @@ namespace LDBot
             if (log.Length > 0)
                 Helper.raiseOnWriteLog(log);
         }
-        protected void runApp(string packageName)
+        protected void runApp(string packageName, string mainActivity, int timeOut = 10)
         {
             if (!isRunning)
                 return;
             setStatus("Run " + packageName);
             LDManager.executeLdConsole(string.Format("runapp --index {0} --packagename {1}", _ld.Index, packageName));
+            //Kiểm tra app có mở lên được ko
+            if (!waitForScreen(mainActivity, timeOut))
+                throw new ScriptException(packageName + " can not opened");
         }
         protected void killApp(string packageName)
         {
@@ -316,16 +329,30 @@ namespace LDBot
         {
             return Helper.GetScreenScalingFactor();
         }
-        protected void deleteGoogleAccount(string email)
+        protected void deleteGoogleAccount(string email, bool isRebootRequired = true)
         {
             if (isRunning)
             {
+                inputKey(ADBKeyEvent.KEYCODE_HOME);
                 string subQuery = string.Format("\"DELETE FROM accounts WHERE name = '{0}'\"", email);
                 string query = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_de/0/accounts_de.db \"{1}\"\"", _ld.Index, subQuery);
                 string query2 = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_ce/0/accounts_ce.db \"{1}\"\"", _ld.Index, subQuery);
                 LDManager.executeLdConsole(query);
                 LDManager.executeLdConsole(query2);
-                restartLD();
+                delay(1000);
+                if (isRebootRequired)
+                {
+                    restartLD();
+                    while (checkView("com.android.launcher3.Launcher"))
+                    {
+                        delay(1000);
+                    }
+                    do
+                    {
+                        delay(3000);
+                    }
+                    while (!checkView("com.android.launcher3.Launcher"));
+                }
             }
         }
         protected bool checkView(string viewCheck)
@@ -347,7 +374,7 @@ namespace LDBot
             delay(2000);
         }
 
-        protected void searchImgAndClick(string findText, string imgPath = "", bool isDebug = false, int clickCount = 1)
+        protected bool searchImgAndClick(string findText, string imgPath = "", bool isDebug = false, int clickCount = 1)
         {
             Point? coords;
             if (imgPath != "")
@@ -360,11 +387,58 @@ namespace LDBot
             if(coords != null)
             {
                 ADBHelper.Tap(_ld.DeviceID, coords.Value.X, coords.Value.Y, clickCount);
+                return true;
             }
             else
             {
                 writeLog(_ld.Name + ": " + findText + " not found");
+                return false;
             }    
+        }
+
+        protected bool waitForScreen(string searchScreen, int timeOut = 5)
+        {
+            while (timeOut > 0)
+            {
+                setStatus("Waiting for screen...");
+                if (checkView(searchScreen))
+                {
+                    delay(1000);
+                    return true;
+                }
+                timeOut--;
+                delay(1000);
+            }
+            return false;
+        }
+        protected bool waitForStr(string searchString, int timeOut = 5, int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
+        {
+            while (timeOut > 0)
+            {
+                setStatus("Searching for string...");
+                if (checkStringInImage(searchString, startCropX, startCropY, right, bottom))
+                {
+                    delay(1000);
+                    return true;
+                }
+                timeOut--;
+                delay(1000);
+            }
+            return false;
+        }
+        protected void shutDownLD()
+        {
+            LDManager.quitLD(_ld.Index);
+        }
+
+        protected void runLD()
+        {
+            LDManager.runLD(_ld);
+            do
+            {
+                delay(3000);
+            }
+            while (!checkView("com.android.launcher3.Launcher"));
         }
         #endregion
     }

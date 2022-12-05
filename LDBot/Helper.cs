@@ -27,6 +27,7 @@ namespace LDBot
         public static event dlgUpdateLDStatus onUpdateLDStatus;
         public static event dlgWriteLog onWriteLog;
         public static event dlgLoadListLD onLoadListLD;
+        public static event dlgGetLDStatus onGetLDStatus;
 
         [DllImport("gdi32.dll", EntryPoint = "GetDeviceCaps", SetLastError = true)]
         public static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
@@ -186,6 +187,14 @@ namespace LDBot
                 return;
             else
                 onLoadListLD();
+        }
+
+        public static string raiseOnGetLDStatus(int index)
+        {
+            if (onGetLDStatus == null)
+                return "";
+            else
+                return onGetLDStatus(index);
         }
 
         public static string runCMD(string fileName, string arg)

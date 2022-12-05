@@ -13,4 +13,5 @@ namespace LDBot
     public delegate void dlgUpdateLDStatus(int ldIndex, string stt);
     public delegate void dlgWriteLog(string log);
     public delegate void dlgLoadListLD();
+    public delegate string dlgGetLDStatus(int index);
 }
