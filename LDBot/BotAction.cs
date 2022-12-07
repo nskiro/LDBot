@@ -404,7 +404,9 @@ namespace LDBot
             {
                 screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, (right - startCropX), (bottom - startCropY)));
             }
-            return Helper.getTextFromImage(screen);
+            string res = Helper.getTextFromImage(screen);
+            screen.Dispose();
+            return res;
         }
 
         protected bool waitForScreen(string searchScreen, int timeOut = 5)
