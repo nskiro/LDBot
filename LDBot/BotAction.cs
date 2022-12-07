@@ -359,7 +359,7 @@ namespace LDBot
         {
             return getView().Contains(viewCheck);
         }
-        protected string getView()
+        public string getView()
         {
             return LDManager.executeLdConsoleForResult(string.Format("adb --index {0} --command \"shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'\"", _ld.Index));
         }
@@ -374,7 +374,7 @@ namespace LDBot
             delay(2000);
         }
 
-        protected bool searchImgAndClick(string findText, string imgPath = "", bool isDebug = false, int clickCount = 1)
+        public bool searchImgAndClick(string findText, string imgPath = "", bool isDebug = false, int clickCount = 1)
         {
             Point? coords;
             if (imgPath != "")
@@ -394,6 +394,17 @@ namespace LDBot
                 writeLog(_ld.Name + ": " + findText + " not found");
                 return false;
             }    
+        }
+
+        protected string getTextInCurScr(int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
+        {
+            Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+            bool flag = startCropX != 0 || startCropY != 0 || right != 0 || bottom != 0;
+            if (flag)
+            {
+                screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, (right - startCropX), (bottom - startCropY)));
+            }
+            return Helper.getTextFromImage(screen);
         }
 
         protected bool waitForScreen(string searchScreen, int timeOut = 5)

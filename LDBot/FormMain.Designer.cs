@@ -54,6 +54,7 @@ namespace LDBot
             this.changeHardwareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rootUnrootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stt_main = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -115,7 +116,8 @@ namespace LDBot
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_LDEmulator,
-            this.changeLogToolStripMenuItem});
+            this.changeLogToolStripMenuItem,
+            this.getViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -306,6 +308,13 @@ namespace LDBot
             this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
             this.changeLogToolStripMenuItem.Text = "Change Log";
             this.changeLogToolStripMenuItem.Click += new System.EventHandler(this.changeLogToolStripMenuItem_Click);
+            // 
+            // getViewToolStripMenuItem
+            // 
+            this.getViewToolStripMenuItem.Name = "getViewToolStripMenuItem";
+            this.getViewToolStripMenuItem.Size = new System.Drawing.Size(84, 25);
+            this.getViewToolStripMenuItem.Text = "Get View";
+            this.getViewToolStripMenuItem.Click += new System.EventHandler(this.getViewToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -821,6 +830,7 @@ namespace LDBot
         private System.Windows.Forms.ToolStripMenuItem scheduleScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem enableRootToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rootUnrootToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getViewToolStripMenuItem;
     }
 }
 

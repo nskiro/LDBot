@@ -780,5 +780,14 @@ namespace LDBot
                 }
             }
         }
+
+        private void getViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (list_Emulator.SelectedItems.Count > 0)
+            {
+                LDEmulator ld = list_Emulator.SelectedItems[0].Tag as LDEmulator;
+                writeLog(ld.botAction.getView());
+            }
+        }
     }
 }
