@@ -411,7 +411,7 @@ namespace LDBot
         {
             while (timeOut > 0)
             {
-                setStatus("Waiting for screen...");
+                setStatus("Wait " + searchScreen);
                 if (checkView(searchScreen))
                 {
                     delay(1000);
@@ -426,7 +426,7 @@ namespace LDBot
         {
             while (timeOut > 0)
             {
-                setStatus("Searching for string...");
+                setStatus("Search: " + searchString);
                 if (checkStringInImage(searchString, startCropX, startCropY, right, bottom))
                 {
                     delay(1000);
