@@ -44,8 +44,3 @@ D:\Projects\LDBot\LDBot\bin\Debug\x64\leptonica-1.82.0.dll
 D:\Projects\LDBot\LDBot\bin\Debug\x64\tesseract50.dll
 D:\Projects\LDBot\LDBot\bin\Debug\tessdata\vie.traineddata
 D:\Projects\LDBot\LDBot\bin\Debug\Tesseract.dll
-D:\Projects\LDBot\LDBot\bin\Debug\Emgu.CV.UI.dll
-D:\Projects\LDBot\LDBot\bin\Debug\Emgu.CV.World.dll
-D:\Projects\LDBot\LDBot\bin\Debug\KAutoHelper.dll
-D:\Projects\LDBot\LDBot\bin\Debug\xNet.dll
-D:\Projects\LDBot\LDBot\bin\Debug\ZedGraph.dll

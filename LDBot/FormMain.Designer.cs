@@ -97,6 +97,8 @@ namespace LDBot
             this.changeProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeHardwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rtb_error = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -107,6 +109,7 @@ namespace LDBot
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDWidth)).BeginInit();
             this.listLDContextMenuStrip1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -121,7 +124,7 @@ namespace LDBot
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(429, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(472, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -325,7 +328,7 @@ namespace LDBot
             this.stt_main});
             this.statusStrip1.Location = new System.Drawing.Point(0, 615);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(429, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(472, 26);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -340,12 +343,13 @@ namespace LDBot
             // 
             this.tabControl1.Controls.Add(this.tab_LDManager);
             this.tabControl1.Controls.Add(this.tab_Config);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 29);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(429, 586);
+            this.tabControl1.Size = new System.Drawing.Size(472, 586);
             this.tabControl1.TabIndex = 2;
             // 
             // tab_LDManager
@@ -355,7 +359,7 @@ namespace LDBot
             this.tab_LDManager.Location = new System.Drawing.Point(4, 29);
             this.tab_LDManager.Name = "tab_LDManager";
             this.tab_LDManager.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_LDManager.Size = new System.Drawing.Size(421, 553);
+            this.tab_LDManager.Size = new System.Drawing.Size(464, 553);
             this.tab_LDManager.TabIndex = 0;
             this.tab_LDManager.Text = "LD Manager";
             this.tab_LDManager.UseVisualStyleBackColor = true;
@@ -366,7 +370,7 @@ namespace LDBot
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox3.Location = new System.Drawing.Point(3, 371);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(415, 179);
+            this.groupBox3.Size = new System.Drawing.Size(458, 179);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Debug Log";
@@ -376,7 +380,8 @@ namespace LDBot
             this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_log.Location = new System.Drawing.Point(3, 22);
             this.rtb_log.Name = "rtb_log";
-            this.rtb_log.Size = new System.Drawing.Size(409, 154);
+            this.rtb_log.ReadOnly = true;
+            this.rtb_log.Size = new System.Drawing.Size(452, 154);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
             // 
@@ -393,7 +398,7 @@ namespace LDBot
             this.list_Emulator.HideSelection = false;
             this.list_Emulator.Location = new System.Drawing.Point(3, 3);
             this.list_Emulator.Name = "list_Emulator";
-            this.list_Emulator.Size = new System.Drawing.Size(415, 547);
+            this.list_Emulator.Size = new System.Drawing.Size(458, 547);
             this.list_Emulator.TabIndex = 0;
             this.list_Emulator.UseCompatibleStateImageBehavior = false;
             this.list_Emulator.View = System.Windows.Forms.View.Details;
@@ -409,12 +414,12 @@ namespace LDBot
             // columnHeader2
             // 
             this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 145;
+            this.columnHeader2.Width = 120;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Status";
-            this.columnHeader3.Width = 229;
+            this.columnHeader3.Width = 298;
             // 
             // tab_Config
             // 
@@ -423,7 +428,7 @@ namespace LDBot
             this.tab_Config.Location = new System.Drawing.Point(4, 29);
             this.tab_Config.Name = "tab_Config";
             this.tab_Config.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Config.Size = new System.Drawing.Size(421, 553);
+            this.tab_Config.Size = new System.Drawing.Size(464, 553);
             this.tab_Config.TabIndex = 1;
             this.tab_Config.Text = "Config";
             this.tab_Config.UseVisualStyleBackColor = true;
@@ -434,7 +439,7 @@ namespace LDBot
             this.groupBox2.Location = new System.Drawing.Point(3, 102);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(415, 448);
+            this.groupBox2.Size = new System.Drawing.Size(458, 448);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LD Player Config";
@@ -452,7 +457,7 @@ namespace LDBot
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 99);
+            this.groupBox1.Size = new System.Drawing.Size(458, 99);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Config";
@@ -507,7 +512,7 @@ namespace LDBot
             // 
             this.btn_SaveGeneralConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SaveGeneralConfig.BackColor = System.Drawing.Color.LimeGreen;
-            this.btn_SaveGeneralConfig.Location = new System.Drawing.Point(337, 56);
+            this.btn_SaveGeneralConfig.Location = new System.Drawing.Point(380, 56);
             this.btn_SaveGeneralConfig.Name = "btn_SaveGeneralConfig";
             this.btn_SaveGeneralConfig.Size = new System.Drawing.Size(75, 28);
             this.btn_SaveGeneralConfig.TabIndex = 3;
@@ -731,11 +736,32 @@ namespace LDBot
             this.enableRootToolStripMenuItem.Text = "Root\\Unroot";
             this.enableRootToolStripMenuItem.Click += new System.EventHandler(this.enableRootToolStripMenuItem_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.rtb_error);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(464, 553);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "ErrorLog";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rtb_error
+            // 
+            this.rtb_error.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_error.Location = new System.Drawing.Point(3, 3);
+            this.rtb_error.Name = "rtb_error";
+            this.rtb_error.ReadOnly = true;
+            this.rtb_error.Size = new System.Drawing.Size(458, 547);
+            this.rtb_error.TabIndex = 0;
+            this.rtb_error.Text = "";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 641);
+            this.ClientSize = new System.Drawing.Size(472, 641);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -758,6 +784,7 @@ namespace LDBot
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDWidth)).EndInit();
             this.listLDContextMenuStrip1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -831,6 +858,8 @@ namespace LDBot
         private System.Windows.Forms.ToolStripMenuItem enableRootToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rootUnrootToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getViewToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.RichTextBox rtb_error;
     }
 }
 

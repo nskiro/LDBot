@@ -60,7 +60,10 @@ namespace LDBot
             }
             else
             {
-                    MessageBox.Show(string.Format("{0}\nTarget: {1}\nType: {2}", err.Message, err.TargetSite?.Name, err.GetType().Name), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(string.Format("{0}\nTarget: {1}\nType: {2}", err.Message, err.TargetSite?.Name, err.GetType().Name), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rtb_error.AppendText(string.Format("[{0}]\n{1}{2}\n=================================", DateTime.Now.ToString("d/M/y HH:mm:ss"), err.Message, err.StackTrace));
+                rtb_log.ScrollToCaret();
+                updateStatus("An error occured. Please see at Error Log");
             }
         }
 
@@ -333,6 +336,8 @@ namespace LDBot
             if (list_Emulator.SelectedItems.Count > 0)
             {
                 LDEmulator ld = list_Emulator.SelectedItems[0].Tag as LDEmulator;
+                if (ld.botAction.isRunning)
+                    LDManager.stopScript(ld);
                 LDManager.quitLD(ld.Index);
                 ld.isRunning = false;
             }
@@ -427,14 +432,18 @@ namespace LDBot
             }
         }
 
-        private void startScriptSelectedsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void startScriptSelectedsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (list_Emulator.SelectedItems.Count > 0)
             {
                 foreach (object selectedLD in list_Emulator.SelectedItems)
                 {
                     LDEmulator ld = ((ListViewItem)selectedLD).Tag as LDEmulator;
-                    LDManager.startScript(ld);
+                    new Task(delegate
+                    {
+                        LDManager.startScript(ld);
+                    }).Start();
+                    await Task.Delay(1000);
                 }
             }
         }
@@ -570,7 +579,7 @@ namespace LDBot
             }
         }
 
-        private void rebootToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void rebootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure to reboot selected LDs?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -579,7 +588,12 @@ namespace LDBot
                     foreach (object selectedLD in list_Emulator.SelectedItems)
                     {
                         LDEmulator ld = ((ListViewItem)selectedLD).Tag as LDEmulator;
-                        LDManager.restartLD(ld);
+                        new Task(delegate
+                        {
+                            LDManager.restartLD(ld);
+                        }).Start();
+                        await Task.Delay(2500);
+                        
                     }
                 }
             }
@@ -594,6 +608,8 @@ namespace LDBot
                     foreach (object selectedLD in list_Emulator.SelectedItems)
                     {
                         LDEmulator ld = ((ListViewItem)selectedLD).Tag as LDEmulator;
+                        if (ld.botAction.isRunning)
+                            LDManager.stopScript(ld);
                         LDManager.quitLD(ld.Index);
                     }
                 }
@@ -641,7 +657,7 @@ namespace LDBot
 
         private void changeLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string changeLog = string.Format("1.1.4::\n-(New) Root/Unroot emulators with one click.\n-(Update) getInstalledPackages(bool isShowDebug = false)\n-(Update) getCurrentIP()\n-(Update) Emulator list shows root/unroot. Emulator name suffix by (R) means Rooted.\n-(Fixed) Bug changeProxy() in script.\n\n1.1.3:\n- (New) Schedule a timer to run the script.\n- (Fixed) Remove sort emulator when start/reboot LD.\n- (Fixed) \"Stop script\" works more stable.\n\n1.1.2:\n- (New) Copy/Paste script from LD to other LD.\n\n1.1.1:\n- (Fixed) List view bug when create/clone/delete LD.\n- (Fixed) Delete script directory when LD deleted.\n\n1.1:\n- (New) Capture guide.");
+            string changeLog = string.Format("1.2.0:\n-(New) Add Tesseract OCR Engine.\n-(New) Add some script functions to recognize text in image or current screen.\n-(Updated) Change the error display to \"Error Log\".\n-(Updated) Update some functions to work more stable.\n-(Fixed) Fix some bugs.\n\n1.1.4:\n-(New) Root/Unroot emulators with one click.\n-(Update) getInstalledPackages(bool isShowDebug = false)\n-(Update) getCurrentIP()\n-(Update) Emulator list shows root/unroot. Emulator name suffix by (R) means Rooted.\n-(Fixed) Bug changeProxy() in script.\n\n1.1.3:\n- (New) Schedule a timer to run the script.\n- (Fixed) Remove sort emulator when start/reboot LD.\n- (Fixed) \"Stop script\" works more stable.\n\n1.1.2:\n- (New) Copy/Paste script from LD to other LD.\n\n1.1.1:\n- (Fixed) List view bug when create/clone/delete LD.\n- (Fixed) Delete script directory when LD deleted.\n\n1.1:\n- (New) Capture guide.");
             MessageBox.Show(changeLog,"Change Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
