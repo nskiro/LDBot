@@ -46,7 +46,6 @@ namespace LDBot
         public virtual void Stop()
         {
             isRunning = false;
-            setStatus("Stop script");
         }
         #endregion
 
@@ -441,6 +440,8 @@ namespace LDBot
         }
         protected void shutDownLD()
         {
+            if (isRunning)
+                Stop();
             LDManager.quitLD(_ld.Index);
         }
 

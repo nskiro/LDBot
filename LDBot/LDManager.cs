@@ -326,7 +326,7 @@ namespace LDBot
 					var checkThread = ldScriptThreads.FirstOrDefault(x => x.Name == "Script" + ld.Index.ToString());
 					if (checkThread != null)
                     {
-						//ld.botAction.Stop();
+						ld.botAction.Stop();
 						checkThread.Abort();
 						ldScriptThreads.Remove(checkThread);
 						Helper.raiseOnUpdateLDStatus(ld.Index, "Script aborted");
