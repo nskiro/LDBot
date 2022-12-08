@@ -373,6 +373,7 @@ namespace LDBot
             {
                 Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
                 coords = Helper.searchTextFromImgAndClick(screen, findText, isDebug);
+                screen.Dispose();
             }    
             if(coords != null)
             {
