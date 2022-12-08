@@ -34,15 +34,6 @@ namespace LDBot
 
         public virtual void CaptureGuide(string fileName) { }
 
-        public void PreStart()
-        {
-            new Task(delegate
-            {
-                isRunning = true;
-                Start();
-            }).Start();
-        }
-
         public virtual void Stop()
         {
             isRunning = false;
@@ -440,8 +431,6 @@ namespace LDBot
         }
         protected void shutDownLD()
         {
-            if (isRunning)
-                Stop();
             LDManager.quitLD(_ld.Index);
         }
 
