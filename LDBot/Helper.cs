@@ -295,7 +295,9 @@ namespace LDBot
         public static string getTextFromImage(string imgPath)
         {
             Bitmap img = (Bitmap)Image.FromFile(imgPath);
-            return getTextFromImage(img);
+            string text = getTextFromImage(img);
+            img.Dispose();
+            return text;
         }
         public static string getTextFromImage(Bitmap img)
         {
@@ -311,7 +313,9 @@ namespace LDBot
         public static Point? searchTextFromImgAndClick(string imgPath, string textToFind, bool isDebug = false)
         {
             Bitmap img = (Bitmap)Image.FromFile(imgPath);
-            return searchTextFromImgAndClick(img, textToFind, isDebug);
+            Point? point = searchTextFromImgAndClick(img, textToFind, isDebug);
+            img.Dispose();
+            return point;
         }
 
         public static Point? searchTextFromImgAndClick(Bitmap img, string textToFind, bool isDebug = false)

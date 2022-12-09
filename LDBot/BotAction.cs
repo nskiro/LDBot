@@ -140,9 +140,10 @@ namespace LDBot
 
         protected bool checkStringInImage(string findStr, int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
         {
+            Bitmap screen = new Bitmap(1, 1);
             try
             {
-                Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
                 bool check = false;
                 bool flag = startCropX != 0 || startCropY != 0 || right != 0 || bottom != 0;
                 if (flag)
@@ -150,10 +151,12 @@ namespace LDBot
                     screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, (right - startCropX), (bottom - startCropY)));
                 }
                 check = Helper.RemoveSign4VietnameseString(Helper.getTextFromImage(screen)).Contains(Helper.RemoveSign4VietnameseString(findStr));
+                screen.Dispose();
                 return check;
             }
             catch (Exception e)
             {
+                screen.Dispose();
                 Helper.raiseOnErrorMessage(e);
                 return false;
             }
@@ -373,6 +376,7 @@ namespace LDBot
             {
                 Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
                 coords = Helper.searchTextFromImgAndClick(screen, findText, isDebug);
+                screen.Dispose();
             }    
             if(coords != null)
             {

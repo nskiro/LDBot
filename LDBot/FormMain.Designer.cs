@@ -74,6 +74,8 @@ namespace LDBot
             this.lbl_BrowseLDFolder = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rtb_error = new System.Windows.Forms.RichTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.listLDContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,8 +99,6 @@ namespace LDBot
             this.changeProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeHardwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.rtb_error = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -108,8 +108,8 @@ namespace LDBot
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDWidth)).BeginInit();
-            this.listLDContextMenuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.listLDContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -368,9 +368,9 @@ namespace LDBot
             // 
             this.groupBox3.Controls.Add(this.rtb_log);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 371);
+            this.groupBox3.Location = new System.Drawing.Point(3, 234);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(458, 179);
+            this.groupBox3.Size = new System.Drawing.Size(458, 316);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Debug Log";
@@ -381,7 +381,7 @@ namespace LDBot
             this.rtb_log.Location = new System.Drawing.Point(3, 22);
             this.rtb_log.Name = "rtb_log";
             this.rtb_log.ReadOnly = true;
-            this.rtb_log.Size = new System.Drawing.Size(452, 154);
+            this.rtb_log.Size = new System.Drawing.Size(452, 291);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
             // 
@@ -548,6 +548,27 @@ namespace LDBot
             this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "LD Folder";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.rtb_error);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(464, 553);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "ErrorLog";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rtb_error
+            // 
+            this.rtb_error.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_error.Location = new System.Drawing.Point(3, 3);
+            this.rtb_error.Name = "rtb_error";
+            this.rtb_error.ReadOnly = true;
+            this.rtb_error.Size = new System.Drawing.Size(458, 547);
+            this.rtb_error.TabIndex = 0;
+            this.rtb_error.Text = "";
             // 
             // listLDContextMenuStrip1
             // 
@@ -736,27 +757,6 @@ namespace LDBot
             this.enableRootToolStripMenuItem.Text = "Root\\Unroot";
             this.enableRootToolStripMenuItem.Click += new System.EventHandler(this.enableRootToolStripMenuItem_Click);
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.rtb_error);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(464, 553);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "ErrorLog";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // rtb_error
-            // 
-            this.rtb_error.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_error.Location = new System.Drawing.Point(3, 3);
-            this.rtb_error.Name = "rtb_error";
-            this.rtb_error.ReadOnly = true;
-            this.rtb_error.Size = new System.Drawing.Size(458, 547);
-            this.rtb_error.TabIndex = 0;
-            this.rtb_error.Text = "";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -766,11 +766,13 @@ namespace LDBot
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LD Bot ";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -783,8 +785,8 @@ namespace LDBot
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_DefaultLDWidth)).EndInit();
-            this.listLDContextMenuStrip1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.listLDContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
