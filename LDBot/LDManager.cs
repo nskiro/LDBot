@@ -328,6 +328,11 @@ namespace LDBot
                     {
 						ld.botAction.Stop();
 						checkThread.Abort();
+						do
+						{
+							Helper.raiseOnUpdateLDStatus(ld.Index, "Script is stopping...");
+						}
+						while (checkThread.ThreadState != System.Threading.ThreadState.Aborted);
 						ldScriptThreads.Remove(checkThread);
 						Helper.raiseOnUpdateLDStatus(ld.Index, "Script aborted");
 					}						
