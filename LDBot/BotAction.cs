@@ -503,7 +503,7 @@ namespace LDBot
         }
         protected void openUrl(string url)
         {
-            LDManager.executeLdConsole(string.Format("adb --index {0} --command \"shell am start -a android.intent.action.VIEW -d {1}\"", _ld.Index, url));
+            LDManager.executeLdConsole(string.Format("adb --index {0} --command \"shell am start -a android.intent.action.VIEW -d {1} --es 'com.android.browser.application_id' 'com.android.browser'\"", _ld.Index, url));
             delay(2000);
         }
 
