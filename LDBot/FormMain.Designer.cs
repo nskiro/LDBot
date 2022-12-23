@@ -123,8 +123,8 @@ namespace LDBot
             this.getViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(472, 29);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(629, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,7 +152,7 @@ namespace LDBot
             this.changeHardwareToolStripMenuItem1,
             this.rootUnrootToolStripMenuItem});
             this.menu_LDEmulator.Name = "menu_LDEmulator";
-            this.menu_LDEmulator.Size = new System.Drawing.Size(95, 25);
+            this.menu_LDEmulator.Size = new System.Drawing.Size(117, 32);
             this.menu_LDEmulator.Text = "Command";
             // 
             // createNewToolStripMenuItem
@@ -161,7 +161,7 @@ namespace LDBot
             this.createNewToolStripMenuItem.ForeColor = System.Drawing.Color.ForestGreen;
             this.createNewToolStripMenuItem.Image = global::LDBot.Properties.Resources.page;
             this.createNewToolStripMenuItem.Name = "createNewToolStripMenuItem";
-            this.createNewToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.createNewToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.createNewToolStripMenuItem.Text = "Create new";
             this.createNewToolStripMenuItem.Click += new System.EventHandler(this.createNewToolStripMenuItem_Click);
             // 
@@ -169,20 +169,20 @@ namespace LDBot
             // 
             this.deletesToolStripMenuItem.Image = global::LDBot.Properties.Resources.delete;
             this.deletesToolStripMenuItem.Name = "deletesToolStripMenuItem";
-            this.deletesToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.deletesToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.deletesToolStripMenuItem.Text = "Delete(s)";
             this.deletesToolStripMenuItem.Click += new System.EventHandler(this.deletesToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(247, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(303, 6);
             // 
             // runSelectedToolStripMenuItem
             // 
             this.runSelectedToolStripMenuItem.Image = global::LDBot.Properties.Resources.power_on__1_;
             this.runSelectedToolStripMenuItem.Name = "runSelectedToolStripMenuItem";
-            this.runSelectedToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.runSelectedToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.runSelectedToolStripMenuItem.Text = "Run(s)";
             this.runSelectedToolStripMenuItem.Click += new System.EventHandler(this.runSelectedToolStripMenuItem_Click);
             // 
@@ -190,7 +190,7 @@ namespace LDBot
             // 
             this.rebootToolStripMenuItem.Image = global::LDBot.Properties.Resources.refresh;
             this.rebootToolStripMenuItem.Name = "rebootToolStripMenuItem";
-            this.rebootToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rebootToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.rebootToolStripMenuItem.Text = "Reboot(s)";
             this.rebootToolStripMenuItem.Click += new System.EventHandler(this.rebootToolStripMenuItem_Click);
             // 
@@ -198,33 +198,33 @@ namespace LDBot
             // 
             this.closesToolStripMenuItem.Image = global::LDBot.Properties.Resources.Shutdown_button_red_wikimedia_svg;
             this.closesToolStripMenuItem.Name = "closesToolStripMenuItem";
-            this.closesToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.closesToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.closesToolStripMenuItem.Text = "Shutdown(s)";
             this.closesToolStripMenuItem.Click += new System.EventHandler(this.closesToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(247, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(303, 6);
             // 
             // quitAllToolStripMenuItem
             // 
             this.quitAllToolStripMenuItem.Image = global::LDBot.Properties.Resources.power_on;
             this.quitAllToolStripMenuItem.Name = "quitAllToolStripMenuItem";
-            this.quitAllToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.quitAllToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.quitAllToolStripMenuItem.Text = "Close All";
             this.quitAllToolStripMenuItem.Click += new System.EventHandler(this.quitAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(247, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(303, 6);
             // 
             // loadScriptSelectedsToolStripMenuItem
             // 
             this.loadScriptSelectedsToolStripMenuItem.Image = global::LDBot.Properties.Resources.import;
             this.loadScriptSelectedsToolStripMenuItem.Name = "loadScriptSelectedsToolStripMenuItem";
-            this.loadScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.loadScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.loadScriptSelectedsToolStripMenuItem.Text = "Load Script(s)";
             this.loadScriptSelectedsToolStripMenuItem.Click += new System.EventHandler(this.loadScriptSelectedsToolStripMenuItem_Click);
             // 
@@ -232,7 +232,7 @@ namespace LDBot
             // 
             this.startScriptSelectedsToolStripMenuItem.Image = global::LDBot.Properties.Resources.tick_mark;
             this.startScriptSelectedsToolStripMenuItem.Name = "startScriptSelectedsToolStripMenuItem";
-            this.startScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.startScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.startScriptSelectedsToolStripMenuItem.Text = "Start Script(s)";
             this.startScriptSelectedsToolStripMenuItem.Click += new System.EventHandler(this.startScriptSelectedsToolStripMenuItem_Click);
             // 
@@ -240,7 +240,7 @@ namespace LDBot
             // 
             this.stopScriptSelectedsToolStripMenuItem.Image = global::LDBot.Properties.Resources.stop;
             this.stopScriptSelectedsToolStripMenuItem.Name = "stopScriptSelectedsToolStripMenuItem";
-            this.stopScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.stopScriptSelectedsToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.stopScriptSelectedsToolStripMenuItem.Text = "Stop Script(s)";
             this.stopScriptSelectedsToolStripMenuItem.Click += new System.EventHandler(this.stopScriptSelectedsToolStripMenuItem_Click);
             // 
@@ -248,7 +248,7 @@ namespace LDBot
             // 
             this.pasteScriptsToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_paste_30;
             this.pasteScriptsToolStripMenuItem.Name = "pasteScriptsToolStripMenuItem";
-            this.pasteScriptsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.pasteScriptsToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.pasteScriptsToolStripMenuItem.Text = "Paste Script(s)";
             this.pasteScriptsToolStripMenuItem.Click += new System.EventHandler(this.pasteScriptsToolStripMenuItem_Click);
             // 
@@ -256,20 +256,20 @@ namespace LDBot
             // 
             this.scheduleScriptToolStripMenuItem1.Image = global::LDBot.Properties.Resources.icons8_clock_64__1_;
             this.scheduleScriptToolStripMenuItem1.Name = "scheduleScriptToolStripMenuItem1";
-            this.scheduleScriptToolStripMenuItem1.Size = new System.Drawing.Size(250, 26);
+            this.scheduleScriptToolStripMenuItem1.Size = new System.Drawing.Size(306, 32);
             this.scheduleScriptToolStripMenuItem1.Text = "Schedule Script";
             this.scheduleScriptToolStripMenuItem1.Click += new System.EventHandler(this.scheduleScriptToolStripMenuItem1_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(247, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(303, 6);
             // 
             // installAPKSelectedsToolStripMenuItem
             // 
             this.installAPKSelectedsToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_apk_16;
             this.installAPKSelectedsToolStripMenuItem.Name = "installAPKSelectedsToolStripMenuItem";
-            this.installAPKSelectedsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.installAPKSelectedsToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.installAPKSelectedsToolStripMenuItem.Text = "Install APK(s)";
             this.installAPKSelectedsToolStripMenuItem.Click += new System.EventHandler(this.installAPKSelectedsToolStripMenuItem_Click);
             // 
@@ -277,7 +277,7 @@ namespace LDBot
             // 
             this.changeProxyToolStripMenuItem1.Image = global::LDBot.Properties.Resources.world;
             this.changeProxyToolStripMenuItem1.Name = "changeProxyToolStripMenuItem1";
-            this.changeProxyToolStripMenuItem1.Size = new System.Drawing.Size(250, 26);
+            this.changeProxyToolStripMenuItem1.Size = new System.Drawing.Size(306, 32);
             this.changeProxyToolStripMenuItem1.Text = "Change Proxy(s)";
             this.changeProxyToolStripMenuItem1.Click += new System.EventHandler(this.changeProxyToolStripMenuItem1_Click);
             // 
@@ -285,7 +285,7 @@ namespace LDBot
             // 
             this.changeInfoToolStripMenuItem.Image = global::LDBot.Properties.Resources.smartphone__1_;
             this.changeInfoToolStripMenuItem.Name = "changeInfoToolStripMenuItem";
-            this.changeInfoToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.changeInfoToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.changeInfoToolStripMenuItem.Text = "Change Phone Model(s)";
             this.changeInfoToolStripMenuItem.Click += new System.EventHandler(this.changeInfoToolStripMenuItem_Click);
             // 
@@ -293,7 +293,7 @@ namespace LDBot
             // 
             this.changeHardwareToolStripMenuItem1.Image = global::LDBot.Properties.Resources.icons8_microchip_16;
             this.changeHardwareToolStripMenuItem1.Name = "changeHardwareToolStripMenuItem1";
-            this.changeHardwareToolStripMenuItem1.Size = new System.Drawing.Size(250, 26);
+            this.changeHardwareToolStripMenuItem1.Size = new System.Drawing.Size(306, 32);
             this.changeHardwareToolStripMenuItem1.Text = "Change Hardware(s)";
             this.changeHardwareToolStripMenuItem1.Click += new System.EventHandler(this.changeHardwareToolStripMenuItem1_Click);
             // 
@@ -301,21 +301,21 @@ namespace LDBot
             // 
             this.rootUnrootToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_powershell_a_task_based_command_line_shell_and_scripting_language_32;
             this.rootUnrootToolStripMenuItem.Name = "rootUnrootToolStripMenuItem";
-            this.rootUnrootToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rootUnrootToolStripMenuItem.Size = new System.Drawing.Size(306, 32);
             this.rootUnrootToolStripMenuItem.Text = "Root\\Unroot";
             this.rootUnrootToolStripMenuItem.Click += new System.EventHandler(this.rootUnrootToolStripMenuItem_Click);
             // 
             // changeLogToolStripMenuItem
             // 
             this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
-            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
+            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(130, 32);
             this.changeLogToolStripMenuItem.Text = "Change Log";
             this.changeLogToolStripMenuItem.Click += new System.EventHandler(this.changeLogToolStripMenuItem_Click);
             // 
             // getViewToolStripMenuItem
             // 
             this.getViewToolStripMenuItem.Name = "getViewToolStripMenuItem";
-            this.getViewToolStripMenuItem.Size = new System.Drawing.Size(84, 25);
+            this.getViewToolStripMenuItem.Size = new System.Drawing.Size(103, 32);
             this.getViewToolStripMenuItem.Text = "Get View";
             this.getViewToolStripMenuItem.Click += new System.EventHandler(this.getViewToolStripMenuItem_Click);
             // 
@@ -326,9 +326,10 @@ namespace LDBot
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stt_main});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 615);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 755);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(472, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(629, 34);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -336,7 +337,7 @@ namespace LDBot
             // 
             this.stt_main.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.stt_main.Name = "stt_main";
-            this.stt_main.Size = new System.Drawing.Size(74, 21);
+            this.stt_main.Size = new System.Drawing.Size(93, 28);
             this.stt_main.Text = "Welcome";
             // 
             // tabControl1
@@ -346,20 +347,22 @@ namespace LDBot
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 29);
+            this.tabControl1.Location = new System.Drawing.Point(0, 36);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(472, 586);
+            this.tabControl1.Size = new System.Drawing.Size(629, 719);
             this.tabControl1.TabIndex = 2;
             // 
             // tab_LDManager
             // 
             this.tab_LDManager.Controls.Add(this.groupBox3);
             this.tab_LDManager.Controls.Add(this.list_Emulator);
-            this.tab_LDManager.Location = new System.Drawing.Point(4, 29);
+            this.tab_LDManager.Location = new System.Drawing.Point(4, 34);
+            this.tab_LDManager.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tab_LDManager.Name = "tab_LDManager";
-            this.tab_LDManager.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_LDManager.Size = new System.Drawing.Size(464, 553);
+            this.tab_LDManager.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tab_LDManager.Size = new System.Drawing.Size(621, 681);
             this.tab_LDManager.TabIndex = 0;
             this.tab_LDManager.Text = "LD Manager";
             this.tab_LDManager.UseVisualStyleBackColor = true;
@@ -368,9 +371,11 @@ namespace LDBot
             // 
             this.groupBox3.Controls.Add(this.rtb_log);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 234);
+            this.groupBox3.Location = new System.Drawing.Point(4, 288);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(458, 316);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(613, 389);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Debug Log";
@@ -378,10 +383,11 @@ namespace LDBot
             // rtb_log
             // 
             this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_log.Location = new System.Drawing.Point(3, 22);
+            this.rtb_log.Location = new System.Drawing.Point(4, 27);
+            this.rtb_log.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rtb_log.Name = "rtb_log";
             this.rtb_log.ReadOnly = true;
-            this.rtb_log.Size = new System.Drawing.Size(452, 291);
+            this.rtb_log.Size = new System.Drawing.Size(605, 358);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
             // 
@@ -396,9 +402,10 @@ namespace LDBot
             this.list_Emulator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_Emulator.FullRowSelect = true;
             this.list_Emulator.HideSelection = false;
-            this.list_Emulator.Location = new System.Drawing.Point(3, 3);
+            this.list_Emulator.Location = new System.Drawing.Point(4, 4);
+            this.list_Emulator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.list_Emulator.Name = "list_Emulator";
-            this.list_Emulator.Size = new System.Drawing.Size(458, 547);
+            this.list_Emulator.Size = new System.Drawing.Size(613, 673);
             this.list_Emulator.TabIndex = 0;
             this.list_Emulator.UseCompatibleStateImageBehavior = false;
             this.list_Emulator.View = System.Windows.Forms.View.Details;
@@ -425,10 +432,11 @@ namespace LDBot
             // 
             this.tab_Config.Controls.Add(this.groupBox2);
             this.tab_Config.Controls.Add(this.groupBox1);
-            this.tab_Config.Location = new System.Drawing.Point(4, 29);
+            this.tab_Config.Location = new System.Drawing.Point(4, 34);
+            this.tab_Config.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tab_Config.Name = "tab_Config";
-            this.tab_Config.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Config.Size = new System.Drawing.Size(464, 553);
+            this.tab_Config.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tab_Config.Size = new System.Drawing.Size(621, 683);
             this.tab_Config.TabIndex = 1;
             this.tab_Config.Text = "Config";
             this.tab_Config.UseVisualStyleBackColor = true;
@@ -436,10 +444,11 @@ namespace LDBot
             // groupBox2
             // 
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 102);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.groupBox2.Location = new System.Drawing.Point(4, 126);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(13, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(458, 448);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(613, 553);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LD Player Config";
@@ -454,17 +463,19 @@ namespace LDBot
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(13, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(458, 99);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(613, 122);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Config";
             // 
             // txt_DefaultLDHeight
             // 
-            this.txt_DefaultLDHeight.Location = new System.Drawing.Point(222, 60);
+            this.txt_DefaultLDHeight.Location = new System.Drawing.Point(296, 74);
+            this.txt_DefaultLDHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_DefaultLDHeight.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -476,7 +487,7 @@ namespace LDBot
             0,
             0});
             this.txt_DefaultLDHeight.Name = "txt_DefaultLDHeight";
-            this.txt_DefaultLDHeight.Size = new System.Drawing.Size(64, 26);
+            this.txt_DefaultLDHeight.Size = new System.Drawing.Size(85, 30);
             this.txt_DefaultLDHeight.TabIndex = 4;
             this.txt_DefaultLDHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_DefaultLDHeight.Value = new decimal(new int[] {
@@ -487,7 +498,8 @@ namespace LDBot
             // 
             // txt_DefaultLDWidth
             // 
-            this.txt_DefaultLDWidth.Location = new System.Drawing.Point(153, 60);
+            this.txt_DefaultLDWidth.Location = new System.Drawing.Point(204, 74);
+            this.txt_DefaultLDWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_DefaultLDWidth.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -499,7 +511,7 @@ namespace LDBot
             0,
             0});
             this.txt_DefaultLDWidth.Name = "txt_DefaultLDWidth";
-            this.txt_DefaultLDWidth.Size = new System.Drawing.Size(63, 26);
+            this.txt_DefaultLDWidth.Size = new System.Drawing.Size(84, 30);
             this.txt_DefaultLDWidth.TabIndex = 4;
             this.txt_DefaultLDWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_DefaultLDWidth.Value = new decimal(new int[] {
@@ -512,9 +524,10 @@ namespace LDBot
             // 
             this.btn_SaveGeneralConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SaveGeneralConfig.BackColor = System.Drawing.Color.LimeGreen;
-            this.btn_SaveGeneralConfig.Location = new System.Drawing.Point(380, 56);
+            this.btn_SaveGeneralConfig.Location = new System.Drawing.Point(509, 69);
+            this.btn_SaveGeneralConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_SaveGeneralConfig.Name = "btn_SaveGeneralConfig";
-            this.btn_SaveGeneralConfig.Size = new System.Drawing.Size(75, 28);
+            this.btn_SaveGeneralConfig.Size = new System.Drawing.Size(100, 34);
             this.btn_SaveGeneralConfig.TabIndex = 3;
             this.btn_SaveGeneralConfig.Text = "Save";
             this.btn_SaveGeneralConfig.UseVisualStyleBackColor = false;
@@ -524,9 +537,10 @@ namespace LDBot
             // 
             this.lbl_BrowseLDFolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_BrowseLDFolder.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lbl_BrowseLDFolder.Location = new System.Drawing.Point(153, 25);
+            this.lbl_BrowseLDFolder.Location = new System.Drawing.Point(204, 31);
+            this.lbl_BrowseLDFolder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_BrowseLDFolder.Name = "lbl_BrowseLDFolder";
-            this.lbl_BrowseLDFolder.Size = new System.Drawing.Size(234, 22);
+            this.lbl_BrowseLDFolder.Size = new System.Drawing.Size(312, 27);
             this.lbl_BrowseLDFolder.TabIndex = 2;
             this.lbl_BrowseLDFolder.Text = "Browse Folder";
             this.lbl_BrowseLDFolder.Click += new System.EventHandler(this.lbl_BrowseLDFolder_Click);
@@ -534,28 +548,31 @@ namespace LDBot
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 62);
+            this.label2.Location = new System.Drawing.Point(8, 76);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.Size = new System.Drawing.Size(169, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Default Resolution";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Location = new System.Drawing.Point(8, 32);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.Size = new System.Drawing.Size(97, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "LD Folder";
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.rtb_error);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(464, 553);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(621, 681);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "ErrorLog";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -563,10 +580,11 @@ namespace LDBot
             // rtb_error
             // 
             this.rtb_error.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_error.Location = new System.Drawing.Point(3, 3);
+            this.rtb_error.Location = new System.Drawing.Point(4, 4);
+            this.rtb_error.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rtb_error.Name = "rtb_error";
             this.rtb_error.ReadOnly = true;
-            this.rtb_error.Size = new System.Drawing.Size(458, 547);
+            this.rtb_error.Size = new System.Drawing.Size(613, 673);
             this.rtb_error.TabIndex = 0;
             this.rtb_error.Text = "";
             // 
@@ -596,13 +614,13 @@ namespace LDBot
             this.changeHardwareToolStripMenuItem,
             this.enableRootToolStripMenuItem});
             this.listLDContextMenuStrip1.Name = "listLDContextMenuStrip1";
-            this.listLDContextMenuStrip1.Size = new System.Drawing.Size(194, 490);
+            this.listLDContextMenuStrip1.Size = new System.Drawing.Size(225, 490);
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Image = global::LDBot.Properties.Resources.power_on__1_;
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.runToolStripMenuItem.Text = "Run LD";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -610,7 +628,7 @@ namespace LDBot
             // 
             this.rebootToolStripMenuItem1.Image = global::LDBot.Properties.Resources.refresh;
             this.rebootToolStripMenuItem1.Name = "rebootToolStripMenuItem1";
-            this.rebootToolStripMenuItem1.Size = new System.Drawing.Size(193, 26);
+            this.rebootToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.rebootToolStripMenuItem1.Text = "Reboot";
             this.rebootToolStripMenuItem1.Click += new System.EventHandler(this.rebootToolStripMenuItem1_Click);
             // 
@@ -618,20 +636,20 @@ namespace LDBot
             // 
             this.closeToolStripMenuItem1.Image = global::LDBot.Properties.Resources.power_on;
             this.closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
-            this.closeToolStripMenuItem1.Size = new System.Drawing.Size(193, 26);
+            this.closeToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.closeToolStripMenuItem1.Text = "Shutdown";
             this.closeToolStripMenuItem1.Click += new System.EventHandler(this.closeToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // cloneToolStripMenuItem1
             // 
             this.cloneToolStripMenuItem1.Image = global::LDBot.Properties.Resources.visualization;
             this.cloneToolStripMenuItem1.Name = "cloneToolStripMenuItem1";
-            this.cloneToolStripMenuItem1.Size = new System.Drawing.Size(193, 26);
+            this.cloneToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.cloneToolStripMenuItem1.Text = "Clone";
             this.cloneToolStripMenuItem1.Click += new System.EventHandler(this.cloneToolStripMenuItem1_Click);
             // 
@@ -639,20 +657,20 @@ namespace LDBot
             // 
             this.deleteToolStripMenuItem1.Image = global::LDBot.Properties.Resources.delete;
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(193, 26);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
             // 
             // loadScriptToolStripMenuItem
             // 
             this.loadScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.import;
             this.loadScriptToolStripMenuItem.Name = "loadScriptToolStripMenuItem";
-            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadScriptToolStripMenuItem.Text = "Load Script";
             this.loadScriptToolStripMenuItem.Click += new System.EventHandler(this.loadScriptToolStripMenuItem_Click);
             // 
@@ -660,7 +678,7 @@ namespace LDBot
             // 
             this.startScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.tick_mark;
             this.startScriptToolStripMenuItem.Name = "startScriptToolStripMenuItem";
-            this.startScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.startScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.startScriptToolStripMenuItem.Text = "Start Script";
             this.startScriptToolStripMenuItem.Click += new System.EventHandler(this.startScriptToolStripMenuItem_Click);
             // 
@@ -668,7 +686,7 @@ namespace LDBot
             // 
             this.stopScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.stop;
             this.stopScriptToolStripMenuItem.Name = "stopScriptToolStripMenuItem";
-            this.stopScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.stopScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stopScriptToolStripMenuItem.Text = "Stop Script";
             this.stopScriptToolStripMenuItem.Click += new System.EventHandler(this.stopScriptToolStripMenuItem_Click);
             // 
@@ -676,7 +694,7 @@ namespace LDBot
             // 
             this.openFolderToolStripMenuItem.Image = global::LDBot.Properties.Resources.folder;
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.openFolderToolStripMenuItem.Text = "Open Script Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
@@ -684,7 +702,7 @@ namespace LDBot
             // 
             this.captureGuideToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_capture_32;
             this.captureGuideToolStripMenuItem.Name = "captureGuideToolStripMenuItem";
-            this.captureGuideToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.captureGuideToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.captureGuideToolStripMenuItem.Text = "Script Capture Guide";
             this.captureGuideToolStripMenuItem.Click += new System.EventHandler(this.captureGuideToolStripMenuItem_Click);
             // 
@@ -692,7 +710,7 @@ namespace LDBot
             // 
             this.copyScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_copy_64;
             this.copyScriptToolStripMenuItem.Name = "copyScriptToolStripMenuItem";
-            this.copyScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.copyScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.copyScriptToolStripMenuItem.Text = "Copy Script";
             this.copyScriptToolStripMenuItem.Click += new System.EventHandler(this.copyScriptToolStripMenuItem_Click);
             // 
@@ -700,7 +718,7 @@ namespace LDBot
             // 
             this.pasteScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_paste_30;
             this.pasteScriptToolStripMenuItem.Name = "pasteScriptToolStripMenuItem";
-            this.pasteScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.pasteScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.pasteScriptToolStripMenuItem.Text = "Paste Script";
             this.pasteScriptToolStripMenuItem.Click += new System.EventHandler(this.pasteScriptToolStripMenuItem_Click);
             // 
@@ -708,20 +726,20 @@ namespace LDBot
             // 
             this.scheduleScriptToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_clock_64__1_;
             this.scheduleScriptToolStripMenuItem.Name = "scheduleScriptToolStripMenuItem";
-            this.scheduleScriptToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.scheduleScriptToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.scheduleScriptToolStripMenuItem.Text = "Schedule Script";
             this.scheduleScriptToolStripMenuItem.Click += new System.EventHandler(this.scheduleScriptToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(221, 6);
             // 
             // installAPKToolStripMenuItem
             // 
             this.installAPKToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_apk_16;
             this.installAPKToolStripMenuItem.Name = "installAPKToolStripMenuItem";
-            this.installAPKToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.installAPKToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.installAPKToolStripMenuItem.Text = "Install APK";
             this.installAPKToolStripMenuItem.Click += new System.EventHandler(this.installAPKToolStripMenuItem_Click);
             // 
@@ -729,7 +747,7 @@ namespace LDBot
             // 
             this.changeInfoToolStripMenuItem1.Image = global::LDBot.Properties.Resources.smartphone__1_;
             this.changeInfoToolStripMenuItem1.Name = "changeInfoToolStripMenuItem1";
-            this.changeInfoToolStripMenuItem1.Size = new System.Drawing.Size(193, 26);
+            this.changeInfoToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.changeInfoToolStripMenuItem1.Text = "Change Phone Model";
             this.changeInfoToolStripMenuItem1.Click += new System.EventHandler(this.changeInfoToolStripMenuItem1_Click);
             // 
@@ -737,7 +755,7 @@ namespace LDBot
             // 
             this.changeProxyToolStripMenuItem.Image = global::LDBot.Properties.Resources.world;
             this.changeProxyToolStripMenuItem.Name = "changeProxyToolStripMenuItem";
-            this.changeProxyToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.changeProxyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.changeProxyToolStripMenuItem.Text = "Change Proxy";
             this.changeProxyToolStripMenuItem.Click += new System.EventHandler(this.changeProxyToolStripMenuItem_Click);
             // 
@@ -745,7 +763,7 @@ namespace LDBot
             // 
             this.changeHardwareToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_microchip_16;
             this.changeHardwareToolStripMenuItem.Name = "changeHardwareToolStripMenuItem";
-            this.changeHardwareToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.changeHardwareToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.changeHardwareToolStripMenuItem.Text = "Change Hardware";
             this.changeHardwareToolStripMenuItem.Click += new System.EventHandler(this.changeHardwareToolStripMenuItem_Click);
             // 
@@ -753,21 +771,22 @@ namespace LDBot
             // 
             this.enableRootToolStripMenuItem.Image = global::LDBot.Properties.Resources.icons8_powershell_a_task_based_command_line_shell_and_scripting_language_32;
             this.enableRootToolStripMenuItem.Name = "enableRootToolStripMenuItem";
-            this.enableRootToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.enableRootToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.enableRootToolStripMenuItem.Text = "Root\\Unroot";
             this.enableRootToolStripMenuItem.Click += new System.EventHandler(this.enableRootToolStripMenuItem_Click);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 641);
+            this.ClientSize = new System.Drawing.Size(629, 789);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LD Bot ";

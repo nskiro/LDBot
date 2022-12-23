@@ -43,86 +43,118 @@ namespace LDBot
         #region Bot Function
         protected void setStatus(string stt)
         {
-            if (stt.Length > 0)
-                Helper.raiseOnUpdateLDStatus(_ld.Index, stt);
+            try
+            {
+                if (stt.Length > 0)
+                    Helper.raiseOnUpdateLDStatus(_ld.Index, stt);
+            }
+            catch(Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
 
         protected bool findAndClick(string imgPath, int timeOut = 7, double similarPercent = 0.9, bool isClickUntilDisApp = false, int xPlus = 0, int yPlus = 0, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
         {
-            if (!isRunning)
-                return false;
-            Bitmap img = (Bitmap)Image.FromFile(imgPath);
+            Bitmap img = null;
             Bitmap screen = null;
-            bool result = false;
-            while (timeOut > 0)
+            try
             {
+                if (!isRunning)
+                    return false;
+                img = (Bitmap)Image.FromFile(imgPath);
+                
+                bool result = false;
+                while (timeOut > 0)
+                {
                 click_image:
-                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
-                bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
-                if (flag)
-                {
-                    screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
-                }
-                Point? point = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent);
-                bool flag2 = point != null;
-                if (flag2)
-                {
-                    setStatus(string.Format("{0} found-click", Helper.getFileNameByPath(imgPath)));
-                    int Xmore = rd.Next(3);
-                    int Ymore = rd.Next(3);
-                    //AutoControl.SendClickOnPosition(_ld.TopHandle, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY, EMouseKey.LEFT, 1);
-                    ADBHelper.Tap(_ld.DeviceID, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY);
-                    if (isClickUntilDisApp)
+                    screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                    bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
+                    if (flag)
                     {
-                        delay(1000);
-                        goto click_image;
+                        screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
                     }
-                    result = true;
-                    break;
+                    Point? point = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent);
+                    bool flag2 = point != null;
+                    if (flag2)
+                    {
+                        setStatus(string.Format("{0} found-click", Helper.getFileNameByPath(imgPath)));
+                        int Xmore = rd.Next(3);
+                        int Ymore = rd.Next(3);
+                        //AutoControl.SendClickOnPosition(_ld.TopHandle, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY, EMouseKey.LEFT, 1);
+                        ADBHelper.Tap(_ld.DeviceID, point.Value.X + Xmore + xPlus + startCropX, point.Value.Y + Ymore + yPlus + startCropY);
+                        if (isClickUntilDisApp)
+                        {
+                            delay(1000);
+                            goto click_image;
+                        }
+                        result = true;
+                        break;
+                    }
+                    setStatus(string.Format("{0} not found", Helper.getFileNameByPath(imgPath)));
+                    timeOut--;
+                    delay(200);
                 }
-                setStatus(string.Format("{0} not found", Helper.getFileNameByPath(imgPath)));
-                timeOut--;
-                delay(200);
+                screen.Dispose();
+                img.Dispose();
+                return result;
             }
-            screen.Dispose();
-            img.Dispose();
-            return result;
+            catch(Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                if(screen != null) screen.Dispose();
+                if(img != null) img.Dispose();
+                return false;
+            }
         }
 
         protected bool findImage(string imgPath, int timeOut = 7, double similarPercent = 0.9, int startCropX = 0, int startCropY = 0, int cropWidth = 0, int cropHeight = 0)
         {
-            if (!isRunning)
-                return false;
-            Bitmap img = (Bitmap)Image.FromFile(imgPath);
+            Bitmap img = null;
             Bitmap screen = null;
-            bool result = false;
-            while (timeOut > 0)
+            try
             {
-                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
-                bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
-                if (flag)
+                if (!isRunning)
+                    return false;
+                img = (Bitmap)Image.FromFile(imgPath);
+                screen = null;
+                bool result = false;
+                while (timeOut > 0)
                 {
-                    screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
+                    screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                    bool flag = startCropX != 0 || startCropY != 0 || cropWidth != 0 || cropHeight != 0;
+                    if (flag)
+                    {
+                        screen = CaptureHelper.CropImage(screen, new Rectangle(startCropX, startCropY, cropWidth, cropHeight));
+                    }
+                    result = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent) != null;
+                    if (result)
+                    {
+                        setStatus(string.Format("{0} found", Helper.getFileNameByPath(imgPath)));
+                        break;
+                    }
+                    timeOut--;
+                    delay(200);
                 }
-                result = ImageScanOpenCV.FindOutPoint(screen, img, similarPercent) != null;
-                if (result)
-                {
-                    setStatus(string.Format("{0} found", Helper.getFileNameByPath(imgPath)));
-                    break;
-                }
-                timeOut--;
-                delay(200);
+                screen.Dispose();
+                img.Dispose();
+                return result;
             }
-            screen.Dispose();
-            img.Dispose();
-            return result;
+            catch(Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                if (screen != null) screen.Dispose();
+                if (img != null) img.Dispose();
+                return false;
+            }
         }
 
         protected void captureImage(string imgName, int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
         {
+            Bitmap screen = null;
             try
             {
-                Bitmap screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
+                screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
                 bool flag = startCropX != 0 || startCropY != 0 || right != 0 || bottom != 0;
                 if (flag)
                 {
@@ -134,13 +166,14 @@ namespace LDBot
             }
             catch(Exception e)
             {
+                if (screen != null) screen.Dispose();
                 Helper.raiseOnErrorMessage(e);
             }
         }
 
         protected bool checkStringInImage(string findStr, int startCropX = 0, int startCropY = 0, int right = 0, int bottom = 0)
         {
-            Bitmap screen = new Bitmap(1, 1);
+            Bitmap screen = null;
             try
             {
                 screen = (Bitmap)CaptureHelper.CaptureWindow(_ld.BindHandle);
@@ -156,114 +189,199 @@ namespace LDBot
             }
             catch (Exception e)
             {
-                screen.Dispose();
+                if(screen != null) screen.Dispose();
                 Helper.raiseOnErrorMessage(e);
                 return false;
             }
         }
         protected void click(int x, int y, int count = 1)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.Tap(_ld.DeviceID, x, y, count);
-            setStatus(string.Format("Click at {0}:{1}", x, y));
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.Tap(_ld.DeviceID, x, y, count);
+                setStatus(string.Format("Click at {0}:{1}", x, y));
+            }
+            catch(Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void clickP(double x, double y, int count = 1)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.TapByPercent(_ld.DeviceID, x, y, count);
-            setStatus(string.Format("Click at {0:0.00}%:{1:0.00}%", x, y));
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.TapByPercent(_ld.DeviceID, x, y, count);
+                setStatus(string.Format("Click at {0:0.00}%:{1:0.00}%", x, y));
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void swipe(int startX, int startY, int stopX, int stopY, int swipeTime = 300)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.Swipe(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
-            setStatus(string.Format("Swipe from {0}:{1} to {2}:{3}", startX, startY, stopX, stopY));
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.Swipe(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
+                setStatus(string.Format("Swipe from {0}:{1} to {2}:{3}", startX, startY, stopX, stopY));
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void swipeP(double startX, double startY, double stopX, double stopY, int swipeTime = 300)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.SwipeByPercent(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
-            setStatus(string.Format("Swipe from {0:0.00}%:{1:0.00}% to {2:0.00}%:{3:0.00}%", startX, startY, stopX, stopY));
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.SwipeByPercent(_ld.DeviceID, startX, startY, stopX, stopY, swipeTime);
+                setStatus(string.Format("Swipe from {0:0.00}%:{1:0.00}% to {2:0.00}%:{3:0.00}%", startX, startY, stopX, stopY));
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void inputKey(ADBKeyEvent key)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.Key(_ld.DeviceID, key);
-            setStatus("Press key " + key.ToString());
-        }
-        protected void inputKey(VKeys key)
-        {
-            if (!isRunning)
-                return;
-            AutoControl.SendKeyBoardPress(_ld.BindHandle, key);
-            setStatus("Press key " + key.ToString());
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.Key(_ld.DeviceID, key);
+                setStatus("Press key " + key.ToString());
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void inputText(string txt)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.InputText(_ld.DeviceID, txt);
-            setStatus("Input: " + txt);
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.InputText(_ld.DeviceID, txt);
+                setStatus("Input: " + txt);
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void clickAndHold(int x, int y, int duration = 500)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.LongPress(_ld.DeviceID, x, y, duration);
+            try
+            {
+                if (!isRunning)
+                    return;
+                setStatus(string.Format("Click hold {0}:{1} {2} ms", x, y, duration));
+                ADBHelper.LongPress(_ld.DeviceID, x, y, duration);
+
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void delay(double ms)
         {
-            if (!isRunning)
-                return;
-            ADBHelper.Delay(ms);
+            try
+            {
+                if (!isRunning)
+                    return;
+                ADBHelper.Delay(ms);
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected List<string> getInstalledPackages(bool isShowDebug = false)
         {
-            if (!isRunning)
-                return null;
-            setStatus("Get installed packages");
-            List<string> installedPackage = new List<string>();
-            string[] results = Helper.runCMD(LDManager.adb, string.Format("-s {0} shell cmd package list package", _ld.DeviceID)).Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string rs in results)
+            try
             {
-                installedPackage.Add(rs.Replace("package:", "").Trim());
-                if (isShowDebug)
-                    writeLog(rs.Replace("package:", "").Trim());
+                if (!isRunning)
+                    return null;
+                setStatus("Get installed packages");
+                List<string> installedPackage = new List<string>();
+                string[] results = Helper.runCMD(LDManager.adb, string.Format("-s {0} shell cmd package list package", _ld.DeviceID)).Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string rs in results)
+                {
+                    installedPackage.Add(rs.Replace("package:", "").Trim());
+                    if (isShowDebug)
+                        writeLog(rs.Replace("package:", "").Trim());
+                }
+                return installedPackage;
             }
-            return installedPackage;
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                return null;
+            }
         }
         protected void writeLog(string log)
         {
-            if (log.Length > 0)
-                Helper.raiseOnWriteLog(log);
+            try
+            {
+                if (log.Length > 0)
+                    Helper.raiseOnWriteLog(log);
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
-        protected void runApp(string packageName, string mainActivity, int timeOut = 10)
+        protected bool runApp(string packageName, string mainActivity, int timeOut = 10)
         {
-            if (!isRunning)
-                return;
-            setStatus("Run " + packageName);
-            LDManager.executeLdConsole(string.Format("runapp --index {0} --packagename {1}", _ld.Index, packageName));
-            //Kiểm tra app có mở lên được ko
-            if (!waitForScreen(mainActivity, timeOut))
-                throw new ScriptException(packageName + " can not opened");
+            try
+            {
+                if (!isRunning)
+                    return false;
+                setStatus("Run " + packageName);
+                LDManager.executeLdConsole(string.Format("runapp --index {0} --packagename {1}", _ld.Index, packageName));
+                //Kiểm tra app có mở lên được ko
+                if (!waitForScreen(mainActivity, timeOut))
+                {
+                    setStatus("Run app failed");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                return false;
+            }
         }
         protected void killApp(string packageName)
         {
-            if (!isRunning)
-                return;
-            setStatus("Kill " + packageName);
-            LDManager.executeLdConsole(string.Format("killapp --index {0} --packagename {1}", _ld.Index, packageName));
+            try
+            {
+                if (!isRunning)
+                    return;
+                setStatus("Kill " + packageName);
+                LDManager.executeLdConsole(string.Format("killapp --index {0} --packagename {1}", _ld.Index, packageName));
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void changeProxy(string proxyConfig = "")
         {
             LDManager.changeProxy(_ld, proxyConfig);
         }
-        protected string getCurrentIP()
+        /*protected string getCurrentIP()
         {
             using (var request = new HttpRequest())
             {
@@ -273,7 +391,7 @@ namespace LDBot
                     if (_ld.isUseProxy)
                         request.Proxy = HttpProxyClient.Parse(_ld.Proxy);
                     string content = request.Get("https://api.ipify.org").ToString();
-                    /*var jsonStruct = new
+                    var jsonStruct = new
                     {
                         ip = "",
                         country = "",
@@ -282,7 +400,7 @@ namespace LDBot
                     var data = JsonConvert.DeserializeAnonymousType(content, jsonStruct);
                     if (data.ip != "")
                         return data.ip;
-                    return "";*/
+                    return "";
                     return content;
                 }
                 catch(Exception e)
@@ -291,7 +409,7 @@ namespace LDBot
                     return "";
                 }
             }
-        }
+        }*/
         protected List<MimeMessage> getAllMails(string mailServer, int port, string mail, string password)
         {
             try
@@ -308,10 +426,17 @@ namespace LDBot
         } 
         protected void clearAppData(string packageName)
         {
-            if (!isRunning)
-                return;
-            setStatus("Clear " + packageName);
-            Helper.runCMD(LDManager.adb, string.Format("-s {0} shell pm clear {1}", _ld.DeviceID, packageName));
+            try
+            {
+                if (!isRunning)
+                    return;
+                setStatus("Clear " + packageName);
+                Helper.runCMD(LDManager.adb, string.Format("-s {0} shell pm clear {1}", _ld.DeviceID, packageName));
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+            }
         }
         protected void restartLD()
         {
@@ -324,33 +449,48 @@ namespace LDBot
         }
         protected void deleteGoogleAccount(string email, bool isRebootRequired = true)
         {
-            if (isRunning)
+            try
             {
-                inputKey(ADBKeyEvent.KEYCODE_HOME);
-                string subQuery = string.Format("\"DELETE FROM accounts WHERE name = '{0}'\"", email);
-                string query = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_de/0/accounts_de.db \"{1}\"\"", _ld.Index, subQuery);
-                string query2 = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_ce/0/accounts_ce.db \"{1}\"\"", _ld.Index, subQuery);
-                LDManager.executeLdConsole(query);
-                LDManager.executeLdConsole(query2);
-                delay(1000);
-                if (isRebootRequired)
+                if (isRunning)
                 {
-                    restartLD();
-                    while (checkView("com.android.launcher3.Launcher"))
+                    inputKey(ADBKeyEvent.KEYCODE_HOME);
+                    string subQuery = string.Format("\"DELETE FROM accounts WHERE name = '{0}'\"", email);
+                    string query = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_de/0/accounts_de.db \"{1}\"\"", _ld.Index, subQuery);
+                    string query2 = string.Format("adb --index {0} --command \"shell sqlite3 /data/system_ce/0/accounts_ce.db \"{1}\"\"", _ld.Index, subQuery);
+                    LDManager.executeLdConsole(query);
+                    LDManager.executeLdConsole(query2);
+                    delay(1000);
+                    if (isRebootRequired)
                     {
-                        delay(1000);
+                        restartLD();
+                        while (checkView("com.android.launcher3.Launcher"))
+                        {
+                            delay(1000);
+                        }
+                        do
+                        {
+                            delay(3000);
+                        }
+                        while (!checkView("com.android.launcher3.Launcher"));
                     }
-                    do
-                    {
-                        delay(3000);
-                    }
-                    while (!checkView("com.android.launcher3.Launcher"));
                 }
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
             }
         }
         protected bool checkView(string viewCheck)
         {
-            return getView().Contains(viewCheck);
+            try
+            {
+                return getView().Contains(viewCheck);
+            }
+            catch (Exception e)
+            {
+                Helper.raiseOnErrorMessage(e);
+                return false;
+            }
         }
         public string getView()
         {

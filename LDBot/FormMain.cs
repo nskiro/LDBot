@@ -62,8 +62,11 @@ namespace LDBot
             {
                 //MessageBox.Show(string.Format("{0}\nTarget: {1}\nType: {2}", err.Message, err.TargetSite?.Name, err.GetType().Name), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 rtb_error.AppendText(string.Format("[{0}]\n{1}{2}\n=================================\n", DateTime.Now.ToString("d/M/y HH:mm:ss"), err.Message, err.StackTrace));
+                rtb_error.ScrollToCaret();
+                rtb_log.SelectionStart = rtb_log.Text.Length;
+                rtb_log.SelectionColor = Color.Red;
+                rtb_log.AppendText(string.Format("[{0}] Error occured\n[1]", DateTime.Now.ToString("HH:mm:ss"), err.Message));
                 rtb_log.ScrollToCaret();
-                updateStatus("An error occured. Please see at Error Log");
             }
         }
 
@@ -108,6 +111,8 @@ namespace LDBot
             }
             else
             {
+                rtb_log.SelectionStart = rtb_log.Text.Length;
+                rtb_log.SelectionColor = Color.Black;
                 rtb_log.AppendText(string.Format("[{0}]{1}{2}", DateTime.Now.ToString("HH:mm:ss"), log.Trim(), Environment.NewLine));
                 rtb_log.ScrollToCaret();
             }    
