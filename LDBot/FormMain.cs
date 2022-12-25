@@ -21,8 +21,8 @@ namespace LDBot
         public FormMain()
         {
             InitializeComponent();
-            this.Location = new Point(Screen.GetBounds(this).Right - this.Width, 0);
             this.Size = new Size(445, Screen.GetBounds(this).Height - 35);
+            this.Location = new Point(Screen.GetBounds(this).Right - this.Width, 0);
             Helper.onUpdateMainStatus += ((stt) => updateStatus(stt));
             Helper.onErrorMessage += ((err) => showError(err));
             Helper.onUpdateLDStatus += ((ldIndex, stt) => updateLDStatus(ldIndex, stt));

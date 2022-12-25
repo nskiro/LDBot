@@ -1,0 +1,5 @@
+LD Management
+	- Create / clone new player.
+	- Modify player info.
+	- Remove player.
+	- ADB enabled by default.

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDBot", "LDBot\LDBot.csproj", "{7976417E-0E7D-4D9E-AC3C-4A9B8AC365CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDBotV2", "LDBotV2\LDBotV2.csproj", "{69F85B77-BE96-4811-87F7-C17FE707B0E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7976417E-0E7D-4D9E-AC3C-4A9B8AC365CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7976417E-0E7D-4D9E-AC3C-4A9B8AC365CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7976417E-0E7D-4D9E-AC3C-4A9B8AC365CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69F85B77-BE96-4811-87F7-C17FE707B0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69F85B77-BE96-4811-87F7-C17FE707B0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69F85B77-BE96-4811-87F7-C17FE707B0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69F85B77-BE96-4811-87F7-C17FE707B0E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
