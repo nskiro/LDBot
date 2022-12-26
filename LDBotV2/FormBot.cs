@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Security;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KAutoHelper;
-using LDBotV2.Core;
-using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 
 namespace LDBotV2
 {
+    [Serializable]
     public partial class FormBot : Form
     {
         public FormBot()
         {
             InitializeComponent();
             Size = new Size(500, Screen.GetBounds(this).Height - 35);
-            Location = new Point(Screen.GetBounds(this).Right - this.Width, 0);
+            Location = new Point(Screen.GetBounds(this).Right - Width, 0);
             Text += Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ToolHelper.onWriteMainStatus += ((stt) => writeSttMain(stt));
             ToolHelper.onWriteError += ((err) => writeError(err));
@@ -34,13 +26,29 @@ namespace LDBotV2
             LDHelper.onUpdateLDStatus += ((ldIndex, stt) => updateLDStatus(ldIndex, stt));
             LDHelper.onLoadListLD += (() => loadEmulatorListView());
             //LDHelper.onGetLDStatus += ((index) => getLDStatus(index));
+            LicMan.createLicense();
+            Task.Run(async () =>
+            {
+                bool isLicensed = await LicMan.checkLicense(HardwareInfo.getUniqueId());
+                if (!isLicensed)
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        Environment.Exit(0);
+                    });
+                }
+            });
         }
 
         private void FormBot_Load(object sender, EventArgs e)
         {
-            ToolHelper.checkValidConfigurations();
-            ToolHelper.startADBServer();
-            loadEmulatorListView();   
+            Task.Run(() =>
+            {
+                ToolHelper.checkValidConfigurations();
+                loadEmulatorListView();
+                ToolHelper.startADBServer();
+            });
+            
         }
 
         private void writeSttMain(string stt)
@@ -70,9 +78,9 @@ namespace LDBotV2
         }
         private void writeError(Exception err)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(() => this.writeError(err)));
+                Invoke(new MethodInvoker(() => writeError(err)));
             }
             else
             {
@@ -104,9 +112,9 @@ namespace LDBotV2
 
         private void loadEmulatorListView()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(() => loadEmulatorListView()));
+                Invoke(new MethodInvoker(() => loadEmulatorListView()));
             }
             else
             {
@@ -115,7 +123,7 @@ namespace LDBotV2
                     LDManager.getAllLD();
                     foreach (LDEmulator ld in LDManager.listEmulator)
                     {
-                        if (!this.list_Emulator.Items.ContainsKey(ld.Index.ToString()))
+                        if (!list_Emulator.Items.ContainsKey(ld.Index.ToString()))
                         {
                             JToken configFileContent = JToken.Parse(File.ReadAllText(string.Format(@"{0}vms\config\leidian{1}.config", ConfigurationManager.AppSettings["LDPath"], ld.Index)));
                             bool isNeedEdit = false;
@@ -471,7 +479,7 @@ namespace LDBotV2
                 {
                     LDEmulator ld = ((ListViewItem)selectedLD).Tag as LDEmulator;
                     bool isRooted = LDHelper.toggleRoot(ld);
-                    ListViewItem[] listViewItemArray = this.list_Emulator.Items.Find(ld.Index.ToString(), false);
+                    ListViewItem[] listViewItemArray = list_Emulator.Items.Find(ld.Index.ToString(), false);
                     if (listViewItemArray.Length != 0)
                     {
                         listViewItemArray[0].SubItems[1].Text = isRooted ? ld.Name + " (R)" : ld.Name;

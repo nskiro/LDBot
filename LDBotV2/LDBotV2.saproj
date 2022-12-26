@@ -6,10 +6,10 @@
             <FeatureUsageReporting Template="res:SmartUsageWithUIConsentFirstRun1033.dll" />
             <StringsEncoding Encode="1" />
             <StrongNameSigning />
-            <Obfuscation FieldsNameMangling="2" NameMangling="1" />
+            <Obfuscation ChangeMethodParent="0" CompilerGeneratedSerializable="0" FieldsNameMangling="2" NameMangling="1" />
             <OtherProtections />
             <OtherOptimizations />
-            <Debugging />
+            <Debugging CreatePDB="1" />
             <CopyDependencies />
         </Options>
         <ApplicationName />
@@ -269,14 +269,78 @@
             <Assembly AssemblyName="LDBotV2, Culture=neutral, PublicKeyToken=null">
                 <Merging>
                     <ResourcesCompression Compress="1" />
-                    <MemberRefsProxy />
+                    <MemberRefsProxy Proxy="1" />
                     <Pruning>
                         <Exclusion />
                     </Pruning>
                     <Obfuscation Obfuscate="1">
-                        <Exclusion />
+                        <Exclusion>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>BotAction</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>DataHelper</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>ImageHelper</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>LDEmulator</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>LDHelper</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>LDManager</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>MailHelper</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>ToolHelper</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>LDBotV2</Assembly>
+                                <Module>LDBotV2.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>LDBotV2</Namespace>
+                                <Name>ScriptFileNameEntity</Name>
+                            </Token>
+                        </Exclusion>
                     </Obfuscation>
-                    <ControlFlow Obfuscate="1" />
+                    <ControlFlow Obfuscate="1" ObfuscationLevel="2" />
                 </Merging>
                 <Embedding />
             </Assembly>
@@ -302,6 +366,43 @@
                 </Merging>
             </Assembly>
             <Assembly AssemblyName="SmartAssembly.StringsEncoding, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="FireSharp, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="System.Management, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="RestSharp, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.JScript, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.License, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.Shared, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.HouseOfCards, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
                 <Merging>
                     <Obfuscation>
                         <Exclusion />

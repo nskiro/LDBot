@@ -1,3 +1,8 @@
+D:\Projects\LDBot\LDBot\bin\Release\x86\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Release\x86\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Release\x64\leptonica-1.82.0.dll
+D:\Projects\LDBot\LDBot\bin\Release\x64\tesseract50.dll
+D:\Projects\LDBot\LDBot\bin\Release\tessdata\vie.traineddata
 D:\Projects\LDBot\LDBot\bin\Release\LDBot.exe.config
 D:\Projects\LDBot\LDBot\bin\Release\LDBot.exe
 D:\Projects\LDBot\LDBot\bin\Release\LDBot.pdb
@@ -10,6 +15,7 @@ D:\Projects\LDBot\LDBot\bin\Release\System.Memory.dll
 D:\Projects\LDBot\LDBot\bin\Release\System.Numerics.Vectors.dll
 D:\Projects\LDBot\LDBot\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\LDBot\LDBot\bin\Release\System.Threading.Tasks.Extensions.dll
+D:\Projects\LDBot\LDBot\bin\Release\Tesseract.dll
 D:\Projects\LDBot\LDBot\bin\Release\BouncyCastle.Crypto.xml
 D:\Projects\LDBot\LDBot\bin\Release\MailKit.pdb
 D:\Projects\LDBot\LDBot\bin\Release\MailKit.xml
@@ -21,6 +27,7 @@ D:\Projects\LDBot\LDBot\bin\Release\System.Memory.xml
 D:\Projects\LDBot\LDBot\bin\Release\System.Numerics.Vectors.xml
 D:\Projects\LDBot\LDBot\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
 D:\Projects\LDBot\LDBot\bin\Release\System.Threading.Tasks.Extensions.xml
+D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.AssemblyReference.cache
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.FormError.resources
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.FormGuideCapture.resources
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.FormLDHardware.resources
@@ -31,10 +38,3 @@ D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.CoreCompileInputs.cache
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.CopyComplete
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.exe
 D:\Projects\LDBot\LDBot\obj\Release\LDBot.pdb
-D:\Projects\LDBot\LDBot\bin\Release\x86\leptonica-1.82.0.dll
-D:\Projects\LDBot\LDBot\bin\Release\x86\tesseract50.dll
-D:\Projects\LDBot\LDBot\bin\Release\x64\leptonica-1.82.0.dll
-D:\Projects\LDBot\LDBot\bin\Release\x64\tesseract50.dll
-D:\Projects\LDBot\LDBot\bin\Release\tessdata\vie.traineddata
-D:\Projects\LDBot\LDBot\bin\Release\Tesseract.dll
-D:\Projects\LDBot\LDBot\obj\Release\LDBot.csproj.AssemblyReference.cache

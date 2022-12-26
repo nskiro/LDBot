@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>V2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -44,6 +47,12 @@
     <Reference Include="Emgu.CV.World, Version=4.1.1.3497, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LDBot\bin\Debug\Emgu.CV.World.dll</HintPath>
+    </Reference>
+    <Reference Include="FireSharp, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.1.1.0\lib\net45\FireSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FireSharp.Serialization.JsonNet, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.Serialization.JsonNet.1.1.0\lib\net45\FireSharp.Serialization.JsonNet.dll</HintPath>
     </Reference>
     <Reference Include="KAutoHelper">
       <HintPath>..\LDBot\bin\Debug\KAutoHelper.dll</HintPath>
@@ -57,6 +66,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -64,6 +76,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -98,13 +111,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\BotAction.cs" />
-    <Compile Include="Core\Prompt.cs" />
-    <Compile Include="Entity\DelegateEntity.cs" />
-    <Compile Include="Core\Helper.cs" />
-    <Compile Include="Core\LDEmulator.cs" />
-    <Compile Include="Core\LDManager.cs" />
-    <Compile Include="Entity\ScriptFileNameEntity.cs" />
+    <Compile Include="BotAction.cs" />
+    <Compile Include="DelegateEntity.cs" />
     <Compile Include="FormBot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,8 +131,14 @@
     <Compile Include="FormLDHardware.Designer.cs">
       <DependentUpon>FormLDHardware.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="LDEmulator.cs" />
+    <Compile Include="LDManager.cs" />
+    <Compile Include="LicMan.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Prompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptFileNameEntity.cs" />
     <EmbeddedResource Include="FormBot.resx">
       <DependentUpon>FormBot.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-microchip-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="V2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Tesseract.5.2.0\build\Tesseract.targets" Condition="Exists('..\packages\Tesseract.5.2.0\build\Tesseract.targets')" />
